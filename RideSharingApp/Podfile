@@ -1,0 +1,58 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '10.0'
+
+workspace 'RideSharingApp.xcworkspace'
+
+project 'DriverProject/DriverSampleApp.xcodeproj'
+project 'UserProject/UserSampleApp.xcodeproj'
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.3'
+        end
+    end
+end
+
+target 'UserSampleApp' do
+    project 'UserProject/UserSampleApp.xcodeproj'
+    # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+    use_frameworks!
+    
+    # Pods for UserSampleApp
+    pod 'Firebase/Core'
+    pod 'Firebase/Database'
+    pod 'Firebase/Auth'
+    pod 'FirebaseUI/Phone'
+    pod 'HyperTrack'
+    pod 'MBProgressHUD', '~> 1.1.0'
+
+    
+end
+
+target 'DriverSampleApp' do
+  project 'DriverProject/DriverSampleApp.xcodeproj'
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for DriverSampleApp
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'FirebaseUI/Phone'
+  pod 'HyperTrack'
+  pod 'MBProgressHUD', '~> 1.1.0'
+
+  target 'DriverSampleAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'DriverSampleAppUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+
