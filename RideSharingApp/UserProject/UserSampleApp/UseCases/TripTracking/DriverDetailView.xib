@@ -9,6 +9,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="WorkSans-Regular.ttf">
+            <string>WorkSans-Regular</string>
+        </array>
+        <array key="WorkSans-SemiBold.ttf">
+            <string>WorkSans-SemiBold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -24,18 +32,18 @@
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qij-mS-7jI">
-                    <rect key="frame" x="86" y="32" width="220" height="36"/>
+                    <rect key="frame" x="86" y="33" width="210" height="35"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nuj-7Q-rvV">
-                            <rect key="frame" x="0.0" y="0.0" width="220" height="19.5"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <rect key="frame" x="0.0" y="0.0" width="210" height="19"/>
+                            <fontDescription key="fontDescription" name="WorkSans-SemiBold" family="Work Sans" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GyF-zS-JF4">
-                            <rect key="frame" x="0.0" y="19" width="220" height="17"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <nil key="textColor"/>
+                            <rect key="frame" x="0.0" y="18.5" width="210" height="16.5"/>
+                            <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
+                            <color key="textColor" red="0.43529411764705883" green="0.43529411764705883" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -50,16 +58,20 @@
                         <constraint firstItem="GyF-zS-JF4" firstAttribute="top" secondItem="Nuj-7Q-rvV" secondAttribute="bottom" id="y4J-HZ-D5N"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2d-xg-rVk">
-                    <rect key="frame" x="314" y="28" width="44" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2d-xg-rVk">
+                    <rect key="frame" x="304" y="28" width="54" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="44" id="ECU-vS-2KT"/>
+                        <constraint firstAttribute="width" constant="54" id="ECU-vS-2KT"/>
                         <constraint firstAttribute="height" constant="44" id="RB1-ED-Cpp"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                    <state key="normal" title="CALL">
-                        <color key="titleColor" red="0.1215686275" green="0.78039215689999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="CALL" image="ic_call">
+                        <color key="titleColor" red="0.0" green="0.78823529411764703" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="callPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="J43-2U-2FL"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -83,6 +95,7 @@
         </view>
     </objects>
     <resources>
+        <image name="ic_call" width="14" height="14"/>
         <image name="ic_user" width="30" height="30"/>
     </resources>
 </document>

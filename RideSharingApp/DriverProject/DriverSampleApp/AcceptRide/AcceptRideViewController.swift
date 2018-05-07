@@ -49,10 +49,14 @@ class AcceptRideViewController: UIViewController, AlertHandler {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setMapImage()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         outerCircleSetup()
         innerCircleSetup()
         mapImageViewSetup()
-        setMapImage()
     }
 
     override func didReceiveMemoryWarning() {

@@ -12,6 +12,8 @@
 		274B5AAC209B224500EFFBFD /* WorkSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 274B5AA8209B224500EFFBFD /* WorkSans-SemiBold.ttf */; };
 		274B5AAD209B224500EFFBFD /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 274B5AA9209B224500EFFBFD /* WorkSans-Regular.ttf */; };
 		274B5AAE209B224500EFFBFD /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 274B5AAA209B224500EFFBFD /* WorkSans-Bold.ttf */; };
+		274B5ABC20A0559800EFFBFD /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B5ABA20A0559800EFFBFD /* LocationPermissionViewController.swift */; };
+		274B5ABD20A0559800EFFBFD /* LocationPermissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274B5ABB20A0559800EFFBFD /* LocationPermissionViewController.xib */; };
 		2770D38920903DCB000517C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2770D38820903DCB000517C1 /* GoogleService-Info.plist */; };
 		2770D3972095D1C7000517C1 /* DriverDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770D3962095D1C7000517C1 /* DriverDetailView.swift */; };
 		2770D3992095D1EF000517C1 /* DriverDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2770D3982095D1EF000517C1 /* DriverDetailView.xib */; };
@@ -65,6 +67,8 @@
 		274B5AA8209B224500EFFBFD /* WorkSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		274B5AA9209B224500EFFBFD /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Regular.ttf"; sourceTree = "<group>"; };
 		274B5AAA209B224500EFFBFD /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Bold.ttf"; sourceTree = "<group>"; };
+		274B5ABA20A0559800EFFBFD /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
+		274B5ABB20A0559800EFFBFD /* LocationPermissionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationPermissionViewController.xib; sourceTree = "<group>"; };
 		2770D38820903DCB000517C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2770D3962095D1C7000517C1 /* DriverDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetailView.swift; sourceTree = "<group>"; };
 		2770D3982095D1EF000517C1 /* DriverDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverDetailView.xib; sourceTree = "<group>"; };
@@ -149,6 +153,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		274B5AB920A0557F00EFFBFD /* LocationPermission */ = {
+			isa = PBXGroup;
+			children = (
+				274B5ABA20A0559800EFFBFD /* LocationPermissionViewController.swift */,
+				274B5ABB20A0559800EFFBFD /* LocationPermissionViewController.xib */,
+			);
+			path = LocationPermission;
+			sourceTree = "<group>";
+		};
 		277B6EE22089EA8400CFB428 = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +187,7 @@
 		277B6EED2089EA8400CFB428 /* UserSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				274B5AB920A0557F00EFFBFD /* LocationPermission */,
 				274B5AA5209B221A00EFFBFD /* Resources */,
 				2770D38820903DCB000517C1 /* GoogleService-Info.plist */,
 				277B6F2F2089FBF600CFB428 /* UserSampleApp.entitlements */,
@@ -434,6 +448,7 @@
 			files = (
 				277B6F3D208D9EA600CFB428 /* BookTripBottomView.xib in Resources */,
 				2770D38920903DCB000517C1 /* GoogleService-Info.plist in Resources */,
+				274B5ABD20A0559800EFFBFD /* LocationPermissionViewController.xib in Resources */,
 				277B6F1E2089EBEE00CFB428 /* Login.storyboard in Resources */,
 				274B5AAD209B224500EFFBFD /* WorkSans-Regular.ttf in Resources */,
 				274B5AAB209B224500EFFBFD /* WorkSans-Medium.ttf in Resources */,
@@ -548,6 +563,7 @@
 			files = (
 				277B6F3B208D9E0200CFB428 /* Trip.swift in Sources */,
 				277B6F282089ECDB00CFB428 /* HomeViewController.swift in Sources */,
+				274B5ABC20A0559800EFFBFD /* LocationPermissionViewController.swift in Sources */,
 				2770D3972095D1C7000517C1 /* DriverDetailView.swift in Sources */,
 				27A87AC220986F7F002CA79C /* TripHelper.swift in Sources */,
 				277B6F44208F0A4300CFB428 /* TripTrackingUseCaseHandler.swift in Sources */,

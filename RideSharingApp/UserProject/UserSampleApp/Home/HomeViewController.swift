@@ -18,7 +18,7 @@ enum UserState {
     case undefined
 }
 
-class HomeViewController: UIViewController, HTPlaceSelectionDelegate, HTUseCaseNavigationDelegate, BookTripUseCaseProtocol, AlertHandler, TripTrackingUseCaseHandlerDelegate {
+class HomeViewController: UIViewController, HTPlaceSelectionDelegate, HTUseCaseNavigationDelegate, BookTripUseCaseProtocol, AlertHandler, TripTrackingUseCaseHandlerDelegate, LocationPermissionProtocol {
     
     var user: User
     let htMapContainer: HTMapContainer = HTMapContainer.init(frame: CGRect.zero)
@@ -40,6 +40,8 @@ class HomeViewController: UIViewController, HTPlaceSelectionDelegate, HTUseCaseN
     
     @IBOutlet weak var mapContainerView: UIView!
     
+    var isFirstTimeSetup: Bool = false
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("use init() method")
     }
@@ -52,18 +54,58 @@ class HomeViewController: UIViewController, HTPlaceSelectionDelegate, HTUseCaseN
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // TODO: Permission Handling
+        mapSetup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         initialSetup()
-        // TODO: Put this in a loop for error handling case.
-        if let driverId = TripHelper.getCurrentTripDriverId() {
-            listenForCurrentActiveTrip(forDriverId: driverId)
-        } else if let actionId = TripHelper.getLastTripActionId() {
-            let hyperTrackInfo = HyperTrackActionInfo(collectionId: "", pickupActionId: nil, dropActionId: actionId)
-            self.setOrderTracking(forHyperTrackInfo: hyperTrackInfo)
+    }
+    private func initialSetup() {
+        var toShowLocationPermissionScreen = false
+        if (!HyperTrack.locationServicesEnabled()) {
+            // OS Level Location is Disabled
+            toShowLocationPermissionScreen = true
+        } else if (HyperTrack.locationAuthorizationStatus() == .authorizedAlways ||
+            HyperTrack.locationAuthorizationStatus() == .authorizedWhenInUse) {
+            // APP Specific Check
+            toShowLocationPermissionScreen = false
         } else {
-            self.pickupLocation = Location(coordinate: HyperTrack.getCurrentLocation()?.coordinate ?? CLLocationCoordinate2D.zero, displayAddress: "")
-            self.dropSetup()
+            toShowLocationPermissionScreen = true
         }
+        if toShowLocationPermissionScreen == true {
+            launchLocationPermissionScreen()
+        } else {
+            firstTimeSetup()
+        }
+    }
+    
+    private func firstTimeSetup() {
+        if isFirstTimeSetup == false {
+            isFirstTimeSetup = true
+            // TODO: Put this in a loop for error handling case.
+            if let driverId = TripHelper.getCurrentTripDriverId() {
+                listenForCurrentActiveTrip(forDriverId: driverId)
+            } else if let actionId = TripHelper.getLastTripActionId() {
+                let hyperTrackInfo = HyperTrackActionInfo(collectionId: "", pickupActionId: nil, dropActionId: actionId)
+                self.setOrderTracking(forHyperTrackInfo: hyperTrackInfo)
+            } else {
+                self.pickupLocation = Location(coordinate: HyperTrack.getCurrentLocation()?.coordinate ?? CLLocationCoordinate2D.zero, displayAddress: "")
+                self.dropSetup()
+            }
+        }
+    }
+    
+    
+    private func launchLocationPermissionScreen() {
+        let permissionVC = Router.launchLocationPermission(inParent: self)
+        permissionVC.permissionDelegate = self
+    }
+    
+    // MARK: Location Permission Delegate Methods
+    
+    func didFinishedAskingPermissions(currentController: UIViewController) {
+        firstTimeSetup()
     }
     
     private func listenForCurrentActiveTrip(forDriverId driverId: String) {
@@ -118,11 +160,6 @@ class HomeViewController: UIViewController, HTPlaceSelectionDelegate, HTUseCaseN
         })
         //TODO: Do we require motion tracking permission here.
         HyperTrack.requestMotionAuthorization()
-    }
-    
-    private func initialSetup() {
-        locationAuthorization()
-        mapSetup()
     }
     
     func mapSetup() {
@@ -272,6 +309,8 @@ class HomeViewController: UIViewController, HTPlaceSelectionDelegate, HTUseCaseN
         }
     }
     
+    // MARK: Book Trip Use Case Delegate Methods
+    
     func bookTripPressed(forPickup pickup: Location, drop: Location) {
         pickupLocation = pickup
         dropLocation   = drop
@@ -298,6 +337,16 @@ class HomeViewController: UIViewController, HTPlaceSelectionDelegate, HTUseCaseN
         }
     }
     
+    func pickupChangedPressed(forPickup pickup: Location) {
+        isChangingDrop = false
+        showPlaceSelectionUseCase(forLocation: pickup, toHideBack: false, placeHolderText: "Enter Your Pickup", toShowCurrentLocation: true)
+    }
+    
+    func dropChangedPressed(forDropup dropup: Location) {
+        isChangingDrop = true
+        showPlaceSelectionUseCase(forLocation: dropup, toHideBack: false, placeHolderText: "Enter Your Destination", toShowCurrentLocation: false)
+    }
+    
     @objc private func timerReached() {
         MBProgressHUD.hide(for: self.view, animated: true)
         bookTimer.invalidate()
@@ -322,18 +371,34 @@ class HomeViewController: UIViewController, HTPlaceSelectionDelegate, HTUseCaseN
         dropSetup()
     }
     
-    func pickupChangedPressed(forPickup pickup: Location) {
-        isChangingDrop = false
-        showPlaceSelectionUseCase(forLocation: pickup, toHideBack: false, placeHolderText: "Enter Your Pickup", toShowCurrentLocation: true)
+    func callPressed() {
+        if let number = self.trip?.driverDetails?.phone {
+            let phoneNumber: String = "telprompt://".appending(number)
+            let url = URL.init(string: phoneNumber)
+            UIApplication.shared.open(url!, options: [:], completionHandler: { (success) in
+            })
+        }
     }
     
-    func dropChangedPressed(forDropup dropup: Location) {
-        isChangingDrop = true
-        showPlaceSelectionUseCase(forLocation: dropup, toHideBack: false, placeHolderText: "Enter Your Destination", toShowCurrentLocation: false)
-    }
-    
-    func shareRide() {
+    func shareRide(forAction action: HTAction) {
         //TODO: Share Ride functionality
+        var etaString = ""
+        if let eta = action.eta {
+            etaString = self.dateToString(date: eta)
+        }
+        let shareText = etaString.isEmpty ? ("See my ride location " + action.trackingUrl) : ("Will be there by " + etaString + ". See my ride location "  + action.trackingUrl)
+        let activityViewController = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.excludedActivityTypes = [.print, .assignToContact, .saveToCameraRoll]
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    private func dateToString(date: Date ) -> String {
+        let format = "hh:mm a"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.locale = Locale.init(identifier: "en_US")
+        return dateFormatter.string(from: date)
     }
     
     // MARK: Validity Check Methods

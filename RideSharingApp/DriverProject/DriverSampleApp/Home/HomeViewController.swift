@@ -43,12 +43,14 @@ class HomeViewController: UIViewController, AcceptRideProtocol, TripTrackingDele
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        initialSetup()
+        //initialSetup()
         //testRemoveAllActions()
+        mapSetup()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        initialSetup()
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,35 +88,38 @@ class HomeViewController: UIViewController, AcceptRideProtocol, TripTrackingDele
     }
     
     private func initialSetup() {
-        locationAuthorization()
-        mapSetup()
-        firstTimeSetup()
-//        var toShowLocationPermissionScreen = false
-//        if (!HyperTrack.locationServicesEnabled()) {
-//            // Location permission OS level check
-//            toShowLocationPermissionScreen = true
-//        } else if (HyperTrack.locationAuthorizationStatus() != .authorizedAlways) {
-//            // APP Specific Check
-//            toShowLocationPermissionScreen = true
-//        } else {
-//            // Motion Check
-//            if(HyperTrack.isActivityAvailable()){
-//                // Motion Data Available On Device
-//                HyperTrack.motionAuthorizationStatus(completionHandler: { (authorized) in
-//                    if(!authorized){
-//                        toShowLocationPermissionScreen = false
-//                    }
-//                })
-//            }
-//        }
-//        if toShowLocationPermissionScreen == true {
-//            let permissionVC = Router.launchLocationPermission(inParent: self)
-//            permissionVC.permissionDelegate = self
-//        } else {
-//            // all looks good
-//            firstTimeSetup()
-//        }
-
+        var toShowLocationPermissionScreen = false
+        if (!HyperTrack.locationServicesEnabled()) {
+            // OS Level Location is Disabled
+            toShowLocationPermissionScreen = true
+        } else if (HyperTrack.locationAuthorizationStatus() != .authorizedAlways) {
+            // APP Specific Check
+            toShowLocationPermissionScreen = true
+        }
+        if toShowLocationPermissionScreen == true {
+            launchLocationPermissionScreen()
+        } else {
+            // Motion Check
+            if(HyperTrack.isActivityAvailable()) {
+                // Motion Data Available on device
+                HyperTrack.motionAuthorizationStatus(completionHandler: { (authorized) in
+                    if (!authorized) {
+                        self.launchLocationPermissionScreen()
+                    } else {
+                        self.firstTimeSetup()
+                    }
+                })
+            } else {
+                // Motion Data not available
+                firstTimeSetup()
+            }
+        }
+    }
+    
+    private func launchLocationPermissionScreen() {
+        //TODO: Handling if any other screen is presented above it
+        let permissionVC = Router.launchLocationPermission(inParent: self)
+        permissionVC.permissionDelegate = self
     }
     
     func firstTimeSetup() {

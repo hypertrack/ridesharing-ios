@@ -48,6 +48,7 @@ struct UserDetails {
 struct DriverDetails {
     let name: String
     let carDetails: String
+    let phone: String?
 }
 
 extension UserDetails {
@@ -124,7 +125,8 @@ extension DriverDetails {
         guard let name = dict["name"] as? String, let carDetails = dict["car_details"] as? String else {
             return nil
         }
-        let driverDetails = DriverDetails(name: name, carDetails: carDetails)
+        let phone = dict["phone"] as? String
+        let driverDetails = DriverDetails(name: name, carDetails: carDetails, phone: phone)
         return driverDetails
     }
 }

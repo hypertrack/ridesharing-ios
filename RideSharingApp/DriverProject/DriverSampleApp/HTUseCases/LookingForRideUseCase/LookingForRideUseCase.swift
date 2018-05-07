@@ -9,6 +9,13 @@
 import Foundation
 import HyperTrack
 
+enum WorkSansFontName: String {
+    case bold       = "WorkSans-Bold"
+    case medium     = "WorkSans-Medium"
+    case regular    = "WorkSans-Regular"
+    case semiBold   = "WorkSans-SemiBold"
+}
+
 class LookingForRideUseCase: HTBaseUseCase, HTMapViewUseCase {
     
     func update() {
@@ -30,6 +37,8 @@ class LookingForRideUseCase: HTBaseUseCase, HTMapViewUseCase {
     init(withDriver driver: Driver) {
         let driverContainerView = HTViewFactory.createBottomViewContainer()
         let primaryAction = HTViewFactory.createPrimaryActionButton("Finding riders near you")
+        primaryAction.titleLabel?.font = UIFont(name: WorkSansFontName.semiBold.rawValue, size: 12)
+        primaryAction.titleLabel?.textColor = UIColor.white
         primaryAction.heightAnchor.constraint(equalToConstant: 52).isActive = true
         primaryAction.topCornerRadius = 14
         

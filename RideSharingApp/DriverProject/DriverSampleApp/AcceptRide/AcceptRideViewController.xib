@@ -10,6 +10,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="WorkSans-Regular.ttf">
+            <string>WorkSans-Regular</string>
+        </array>
+        <array key="WorkSans-SemiBold.ttf">
+            <string>WorkSans-SemiBold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AcceptRideViewController" customModule="HyperTrack_Driver_App" customModuleProvider="target">
             <connections>
@@ -36,6 +44,7 @@
                         <constraint firstAttribute="width" constant="100" id="bE6-B4-vhX"/>
                         <constraint firstAttribute="height" constant="30" id="os4-RS-bId"/>
                     </constraints>
+                    <fontDescription key="fontDescription" name="WorkSans-SemiBold" family="Work Sans" pointSize="12"/>
                     <state key="normal" title="CANCEL">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
@@ -57,11 +66,11 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_map_loading" translatesAutoresizingMaskIntoConstraints="NO" id="s8g-KW-4Zf">
                                     <rect key="frame" x="28" y="28" width="233" height="233"/>
                                 </imageView>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_map_marker" translatesAutoresizingMaskIntoConstraints="NO" id="XJv-0Q-ey4">
-                                    <rect key="frame" x="130" y="130" width="28" height="28"/>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_map_marker" translatesAutoresizingMaskIntoConstraints="NO" id="XJv-0Q-ey4">
+                                    <rect key="frame" x="130" y="127.5" width="28" height="33"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="28" id="dhC-BZ-Nk9"/>
-                                        <constraint firstAttribute="height" constant="28" id="r70-wX-iMq"/>
+                                        <constraint firstAttribute="height" constant="33" id="r70-wX-iMq"/>
                                     </constraints>
                                 </imageView>
                             </subviews>
@@ -78,7 +87,8 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="P8M-2e-NGR" secondAttribute="height" multiplier="1:1" id="dOG-bv-89D"/>
+                        <constraint firstAttribute="height" secondItem="P8M-2e-NGR" secondAttribute="width" multiplier="1:1" id="dOG-bv-89D"/>
+                        <constraint firstAttribute="height" constant="321" id="dRA-bR-VWB"/>
                         <constraint firstAttribute="trailing" secondItem="va1-ZZ-sg6" secondAttribute="trailing" constant="16" id="eD5-Ix-eb9"/>
                         <constraint firstAttribute="bottom" secondItem="va1-ZZ-sg6" secondAttribute="bottom" constant="16" id="lQB-R8-Keh"/>
                         <constraint firstItem="va1-ZZ-sg6" firstAttribute="top" secondItem="P8M-2e-NGR" secondAttribute="top" constant="16" id="mJZ-Yx-46Y"/>
@@ -88,15 +98,15 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Rr-lf-IiT">
                     <rect key="frame" x="35" y="405" width="312" height="148"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="DESTINATION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cls-Pt-pBk">
-                            <rect key="frame" x="31" y="17" width="91" height="17"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="PICKUP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cls-Pt-pBk">
+                            <rect key="frame" x="31" y="17" width="44.5" height="14.5"/>
+                            <fontDescription key="fontDescription" name="WorkSans-SemiBold" family="Work Sans" pointSize="12"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoO-CY-nTC">
-                            <rect key="frame" x="31" y="37" width="260" height="28"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <rect key="frame" x="31" y="34.5" width="260" height="30.5"/>
+                            <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -111,14 +121,14 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gai-X2-X8D">
-                                    <rect key="frame" x="64" y="26" width="31" height="14.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <rect key="frame" x="64" y="26.5" width="32.5" height="14.5"/>
+                                    <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.8 ☆ ☆ ☆ ☆ ☆" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mP1-mb-ram">
-                                    <rect key="frame" x="183.5" y="26" width="96.5" height="14.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <rect key="frame" x="181.5" y="26.5" width="98.5" height="14.5"/>
+                                    <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -160,6 +170,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="kUi-DH-KsU"/>
                     </constraints>
+                    <fontDescription key="fontDescription" name="WorkSans-SemiBold" family="Work Sans" pointSize="12"/>
                     <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="ACCEPT RIDE">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

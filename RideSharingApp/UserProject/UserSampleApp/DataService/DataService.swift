@@ -76,6 +76,7 @@ class DataService: NSObject {
             var driverId: String? = nil
             var driverName: String? = nil
             var carDetails: String? = nil
+            var driverPhone: String? = nil
             for driver in drivers {
                 let driverDict = driver.value
                 let isOnRide = driverDict.value(forKey: "is_on_ride") as? Bool ?? false
@@ -91,6 +92,7 @@ class DataService: NSObject {
                         driverId = driver.key
                         driverName = driverDict.value(forKey: "name") as? String
                         carDetails = driverDict.value(forKey: "car_details") as? String
+                        driverPhone = phone
                         break
                     }
                 }
@@ -101,7 +103,7 @@ class DataService: NSObject {
             }
             // poke him
             // create a trip object
-            let tripDict = self.tripDict(forPickup: pickup, drop: drop, user: user, driverName: driverName, carDetails: carDetails)
+            let tripDict = self.tripDict(forPickup: pickup, drop: drop, user: user, driverName: driverName, carDetails: carDetails, driverPhone: driverPhone)
             // save the trip details in firebase
             self.trips.child(driverId!).updateChildValues(tripDict, withCompletionBlock: { (error, ref) in
                 if let _ = error {
@@ -142,7 +144,7 @@ class DataService: NSObject {
     }
     
     
-    private func tripDict(forPickup pickup: Location, drop: Location, user: User, driverName: String?, carDetails: String?) -> Dictionary<String, AnyObject> {
+    private func tripDict(forPickup pickup: Location, drop: Location, user: User, driverName: String?, carDetails: String?, driverPhone: String?) -> Dictionary<String, AnyObject> {
         var dict: [String: AnyObject] = [:]
         dict["pickup"] = pickup.firebaseData() as AnyObject
         dict["drop"] = drop.firebaseData() as AnyObject
@@ -172,6 +174,10 @@ class DataService: NSObject {
         if let carDetails = carDetails {
             driverInfoDict["car_details"] = carDetails as AnyObject
         }
+        if let phone = driverPhone {
+            driverInfoDict["phone"] = phone as AnyObject
+        }
+        
         dict["driver_info"] = driverInfoDict as AnyObject
         
         return dict

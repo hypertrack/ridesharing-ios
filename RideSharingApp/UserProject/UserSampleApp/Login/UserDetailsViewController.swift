@@ -19,9 +19,9 @@ class UserDetailsViewController: UIViewController, AlertHandler {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
         phoneTextField.text = phoneNumber
         phoneTextField.isUserInteractionEnabled = false
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

@@ -11,7 +11,8 @@ import HyperTrack
 
 protocol TripTrackingUseCaseHandlerDelegate: class {
     func bookAnotherRide()
-    func shareRide()
+    func shareRide(forAction action: HTAction)
+    func callPressed()
 }
 
 enum TripState {
@@ -60,6 +61,7 @@ class TripTrackingUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProt
     }
     
     private let actionId: String
+    private var action: HTAction?
     private weak var mapContainer: HTMapContainer?
     private let trip: Trip?
     
@@ -117,6 +119,7 @@ class TripTrackingUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProt
             // TODO: No action received handling
             return
         }
+        self.action = action
         calculateState(forAction: action)
         prepareUIForState(forAction: action)
     }
@@ -208,9 +211,16 @@ class TripTrackingUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProt
             let driverDetailView = Bundle.main.loadNibNamed("DriverDetailView", owner: self, options: nil)?.first as! DriverDetailView
             driverDetailView.titleLabel.text = trip?.driverDetails?.name ?? action?.user?.name
             driverDetailView.subtitleLabel.text = trip?.driverDetails?.carDetails ?? "TOYOTA Prius | N1KH1L6"
+            driverDetailView.callPressedClosure = { [weak self] in
+                self?.handlerDelgate?.callPressed()
+            }
             stackView.addArrangedSubview(driverDetailView)
-            orderTrackingUseCase?.primaryAction.setTitle("SHARE", for: .normal)
-            orderTrackingUseCase?.isPrimaryActionHidden = false
+            if action?.type.caseInsensitiveCompare(ActionType.drop.rawValue) == .orderedSame {
+                orderTrackingUseCase?.primaryAction.setTitle("SHARE", for: .normal)
+                orderTrackingUseCase?.isPrimaryActionHidden = false
+            } else {
+                orderTrackingUseCase?.isPrimaryActionHidden = true
+            }
             self.driverDetailView = driverDetailView
         }
     }
@@ -242,7 +252,9 @@ class TripTrackingUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProt
         if self.state == .completed {
             handlerDelgate?.bookAnotherRide()
         } else {
-            handlerDelgate?.shareRide()
+            if let action = self.action {
+                handlerDelgate?.shareRide(forAction: action)
+            }
         }
     }
     

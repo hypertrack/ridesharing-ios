@@ -10,6 +10,8 @@ import UIKit
 import HyperTrack
 
 class DriverDetailView: HTBaseView {
+    
+    var callPressedClosure: (()->())? = nil
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
@@ -29,4 +31,7 @@ class DriverDetailView: HTBaseView {
         //UIColor(red:0.44, green:0.44, blue:0.44, alpha:1)
     }
     
+    @IBAction func callPressed(_ sender: UIButton) {
+        callPressedClosure?()
+    }
 }

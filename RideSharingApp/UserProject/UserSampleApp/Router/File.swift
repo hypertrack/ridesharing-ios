@@ -22,6 +22,12 @@ class Router {
         self.getWindow()?.rootViewController = vc
     }
 
+    static func launchLocationPermission(inParent parentVC: UIViewController) -> LocationPermissionViewController {
+        let vc = LocationPermissionViewController.init(nibName: "LocationPermissionViewController", bundle: nil)
+        parentVC.present(vc, animated: true, completion: nil)
+        return vc
+    }
+    
     static private func getWindow() -> UIWindow? {
         var window: UIWindow? = nil
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {

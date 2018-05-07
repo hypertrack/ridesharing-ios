@@ -99,6 +99,8 @@ class TripUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProtocol, HT
         if orderTrackingUseCase == nil {
             let useCase = HTOrderTrackingUseCase.init(viewModel: nil, provider: self)
             useCase.primaryAction.setTitle("GET DIRECTIONS", for: .normal)
+            useCase.primaryAction.titleLabel?.textColor = UIColor.white
+            useCase.primaryAction.titleLabel?.font = UIFont(name: WorkSansFontName.semiBold.rawValue, size: 12)
             useCase.isBackButtonHidden = true
             useCase.isPrimaryActionHidden = true
             mapContainer?.setBottomViewWithUseCase(useCase)
@@ -240,6 +242,8 @@ class TripUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProtocol, HT
         //startTripButton.centerXAnchor.constraint(equalTo: startTripView.centerXAnchor, constant: 0).isActive = true
 //        tripButton.centerYAnchor.constraint(equalTo: tripView.centerYAnchor, constant: 0).isActive = true
         tripButton.setTitle("", for: .normal)
+        tripButton.titleLabel?.textColor = UIColor.white
+        tripButton.titleLabel?.font = UIFont(name: WorkSansFontName.semiBold.rawValue, size: 12)
         tripButton.addTarget(self, action: #selector(tripButtonPressed(sender:)), for: .touchUpInside)
         tripLeadingConstraint = tripButton.leadingAnchor.constraint(equalTo: tripView.leadingAnchor, constant: 24)
         tripLeadingConstraint?.isActive = true
@@ -272,16 +276,16 @@ class TripUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProtocol, HT
         let titleLabel = UILabel.init()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         dropOffView.addSubview(titleLabel)
-        titleLabel.text = "DESTINATION"
+        titleLabel.text = "DROPOFF"
         titleLabel.textColor = UIColor.lightGray
-        titleLabel.font = UIFont.systemFont(ofSize: 12)
+        titleLabel.font = UIFont(name: WorkSansFontName.semiBold.rawValue, size: 12)
 
         let subtitleLabel = UILabel.init()
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         dropOffView.addSubview(subtitleLabel)
         subtitleLabel.text = trip?.drop.displayAddress
         subtitleLabel.textColor = UIColor.black
-        subtitleLabel.font = UIFont.systemFont(ofSize: 14)
+        subtitleLabel.font = UIFont(name: WorkSansFontName.regular.rawValue, size: 14)
 
 
         // constraints
@@ -361,6 +365,8 @@ class TripUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProtocol, HT
         }
         self.orderTrackingUseCase?.isPrimaryActionHidden = false
         self.orderTrackingUseCase?.primaryAction.setTitle("FIND NEW RIDES", for: .normal)
+        self.orderTrackingUseCase?.primaryAction.titleLabel?.textColor = UIColor.white
+        self.orderTrackingUseCase?.primaryAction.titleLabel?.font = UIFont(name: WorkSansFontName.semiBold.rawValue, size: 12)
         self.orderTrackingUseCase?.primaryAction.addTarget(self, action: #selector(TripUseCaseHandler.findNewTrip), for: .touchUpInside)
         self.orderTrackingUseCase?.isBackButtonHidden = true
         let tripSummaryView = Bundle.main.loadNibNamed("TripSummaryView", owner: self, options: nil)?.first as! TripSummaryView
