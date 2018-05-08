@@ -23,6 +23,7 @@ extension HomeViewController: HTMapCustomizationDelegate {
 //        } else if annotationType == .destination {
 //            return UIImage(named: "ic_destination_marker")
 //        }
+        //TODO: Based on state, different markers
         return UIImage(named: "ic_drive")
     }
     

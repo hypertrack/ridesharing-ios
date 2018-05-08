@@ -40,6 +40,9 @@ class LookingForRideUseCase: HTBaseUseCase, HTMapViewUseCase {
         primaryAction.titleLabel?.font = UIFont(name: WorkSansFontName.semiBold.rawValue, size: 12)
         primaryAction.titleLabel?.textColor = UIColor.white
         primaryAction.heightAnchor.constraint(equalToConstant: 52).isActive = true
+        primaryAction.setImage(UIImage(named: "ic_looking_for_ride"), for: .normal)
+        primaryAction.imageEdgeInsets = UIEdgeInsetsMake(0, -4, 0, 0)
+        primaryAction.titleEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 0)
         primaryAction.topCornerRadius = 14
         
         

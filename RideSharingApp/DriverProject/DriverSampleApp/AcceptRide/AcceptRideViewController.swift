@@ -28,6 +28,10 @@ class AcceptRideViewController: UIViewController, AlertHandler {
     
     @IBOutlet weak var mapMarkerImageView: UIImageView!
     
+    // constraints
+    @IBOutlet weak var acceptRideTop: NSLayoutConstraint!
+    @IBOutlet weak var acceptRideBottom: NSLayoutConstraint!
+    
     var trip: Trip
     
     weak var delegate: AcceptRideProtocol? = nil
@@ -67,6 +71,15 @@ class AcceptRideViewController: UIViewController, AlertHandler {
     private func initialSetup() {
         self.view.backgroundColor = UIColor(red:0.93, green:0.95, blue:0.97, alpha:1)
         updateData()
+        marginSetup()
+    }
+    
+    private func marginSetup() {
+        if UIScreen.main.bounds.size.height <= 568 {
+            // iPhone 5 device
+            acceptRideBottom.constant = 8
+            acceptRideTop.constant = 8
+        }
     }
     
     private func outerCircleSetup() {

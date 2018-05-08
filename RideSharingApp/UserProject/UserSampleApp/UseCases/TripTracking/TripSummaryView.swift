@@ -45,7 +45,7 @@ class TripSummaryView: UIView {
         if let action = action {
             let distanceInMeters = Double(action.distance)
             let distanceInMiles  = distanceInMeters/1609.344
-            distanceValueLabel.text = String.init(format: "%.1f", distanceInMiles)
+            distanceValueLabel.text = String.init(format: "%.2f miles", distanceInMiles)
             priceValueLabel.text = priceString(fromDistanceValue: Double(action.distance))
             if let duration = action.duration {
                 //TODO: Convert it in to time

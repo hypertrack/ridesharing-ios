@@ -21,6 +21,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AcceptRideViewController" customModule="HyperTrack_Driver_App" customModuleProvider="target">
             <connections>
+                <outlet property="acceptRideBottom" destination="dOj-yx-X7Q" id="zrU-PQ-HJC"/>
+                <outlet property="acceptRideTop" destination="mYM-WH-OWg" id="9gf-ji-aeP"/>
                 <outlet property="addressLabel" destination="LoO-CY-nTC" id="J7M-C2-aP8"/>
                 <outlet property="innerCircleView" destination="va1-ZZ-sg6" id="mcB-Ag-ecg"/>
                 <outlet property="mapImageView" destination="s8g-KW-4Zf" id="lnr-07-Y1g"/>
@@ -87,7 +89,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" secondItem="P8M-2e-NGR" secondAttribute="width" multiplier="1:1" id="dOG-bv-89D"/>
+                        <constraint firstAttribute="width" secondItem="P8M-2e-NGR" secondAttribute="height" multiplier="1:1" id="dOG-bv-89D"/>
                         <constraint firstAttribute="height" constant="321" id="dRA-bR-VWB"/>
                         <constraint firstAttribute="trailing" secondItem="va1-ZZ-sg6" secondAttribute="trailing" constant="16" id="eD5-Ix-eb9"/>
                         <constraint firstAttribute="bottom" secondItem="va1-ZZ-sg6" secondAttribute="bottom" constant="16" id="lQB-R8-Keh"/>
@@ -104,8 +106,11 @@
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoO-CY-nTC">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoO-CY-nTC">
                             <rect key="frame" x="31" y="34.5" width="260" height="30.5"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" id="NXh-1h-HWH"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
