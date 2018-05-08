@@ -69,10 +69,8 @@ HyperTrack.initialize("YOUR_PUBLISHABLE_KEY")
 
 
 ### 4. Tracking
-- To overview the tracking experience provided by HyperTrack SDK, feel free to use "createMockAction" instead of "createAction" in Driver app (StartRideActivity.java).
 
-- In these samples apps, Driver app creates action, which are tracked by Driver & Consumer apps.
-
+- In these samples apps, Driver app creates actions for pickup and drop, which are tracked by Driver & Consumer apps.
 
 ## Documentation
 For detailed documentation of the APIs, customizations and what all you can build using HyperTrack, please visit the official [docs](https://www.hypertrack.com/docs).
