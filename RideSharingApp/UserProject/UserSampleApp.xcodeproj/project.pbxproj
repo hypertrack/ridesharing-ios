@@ -14,7 +14,6 @@
 		274B5AAE209B224500EFFBFD /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 274B5AAA209B224500EFFBFD /* WorkSans-Bold.ttf */; };
 		274B5ABC20A0559800EFFBFD /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274B5ABA20A0559800EFFBFD /* LocationPermissionViewController.swift */; };
 		274B5ABD20A0559800EFFBFD /* LocationPermissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 274B5ABB20A0559800EFFBFD /* LocationPermissionViewController.xib */; };
-		2770D38920903DCB000517C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2770D38820903DCB000517C1 /* GoogleService-Info.plist */; };
 		2770D3972095D1C7000517C1 /* DriverDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770D3962095D1C7000517C1 /* DriverDetailView.swift */; };
 		2770D3992095D1EF000517C1 /* DriverDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2770D3982095D1EF000517C1 /* DriverDetailView.xib */; };
 		2770D39C2095DC23000517C1 /* TripSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770D39A2095DC23000517C1 /* TripSummaryView.swift */; };
@@ -69,7 +68,6 @@
 		274B5AAA209B224500EFFBFD /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Bold.ttf"; sourceTree = "<group>"; };
 		274B5ABA20A0559800EFFBFD /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
 		274B5ABB20A0559800EFFBFD /* LocationPermissionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationPermissionViewController.xib; sourceTree = "<group>"; };
-		2770D38820903DCB000517C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2770D3962095D1C7000517C1 /* DriverDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetailView.swift; sourceTree = "<group>"; };
 		2770D3982095D1EF000517C1 /* DriverDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverDetailView.xib; sourceTree = "<group>"; };
 		2770D39A2095DC23000517C1 /* TripSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripSummaryView.swift; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 			children = (
 				274B5AB920A0557F00EFFBFD /* LocationPermission */,
 				274B5AA5209B221A00EFFBFD /* Resources */,
-				2770D38820903DCB000517C1 /* GoogleService-Info.plist */,
 				277B6F2F2089FBF600CFB428 /* UserSampleApp.entitlements */,
 				277B6F332089FE3900CFB428 /* Extensions */,
 				277B6F302089FCBC00CFB428 /* DataService */,
@@ -447,7 +444,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				277B6F3D208D9EA600CFB428 /* BookTripBottomView.xib in Resources */,
-				2770D38920903DCB000517C1 /* GoogleService-Info.plist in Resources */,
 				274B5ABD20A0559800EFFBFD /* LocationPermissionViewController.xib in Resources */,
 				277B6F1E2089EBEE00CFB428 /* Login.storyboard in Resources */,
 				274B5AAD209B224500EFFBFD /* WorkSans-Regular.ttf in Resources */,

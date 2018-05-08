@@ -12,6 +12,7 @@ import HyperTrack
 
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -63,7 +64,8 @@ extension AppDelegate {
     }
     
     private func initialHyperTrackSetup() {
-        HyperTrack.initialize("pk_test_8f3c47afa5e794ee1bd3b556161a0b037f8e54c0")
+        //TODO: Add Your HyperTrack Id Here
+        HyperTrack.initialize("")
     }
     
     private func initialViewControllerSetup() {

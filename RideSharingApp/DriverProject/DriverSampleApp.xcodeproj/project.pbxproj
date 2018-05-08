@@ -37,7 +37,6 @@
 		27F89D52207DC45000EA588C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F89D50207DC45000EA588C /* LaunchScreen.storyboard */; };
 		27F89D5D207DC45000EA588C /* DriverSampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D5C207DC45000EA588C /* DriverSampleAppTests.swift */; };
 		27F89D68207DC45000EA588C /* DriverSampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D67207DC45000EA588C /* DriverSampleAppUITests.swift */; };
-		27F89D76207DCF0200EA588C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27F89D75207DCF0200EA588C /* GoogleService-Info.plist */; };
 		27F89D79207DD07300EA588C /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F89D77207DD07300EA588C /* Login.storyboard */; };
 		27F89D7E207DD11400EA588C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D7D207DD11400EA588C /* LoginViewController.swift */; };
 		27F89D80207DE1A100EA588C /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D7F207DE1A000EA588C /* DataService.swift */; };
@@ -104,7 +103,6 @@
 		27F89D63207DC45000EA588C /* DriverSampleAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DriverSampleAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F89D67207DC45000EA588C /* DriverSampleAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverSampleAppUITests.swift; sourceTree = "<group>"; };
 		27F89D69207DC45000EA588C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		27F89D75207DCF0200EA588C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		27F89D78207DD07300EA588C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		27F89D7D207DD11400EA588C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = DriverSampleApp/Login/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		27F89D7F207DE1A000EA588C /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 				27F89D7C207DD0DC00EA588C /* Login */,
 				27DE6F6A207F671B006482E7 /* AcceptRide */,
 				27F89D85207DF93000EA588C /* DriverSampleApp.entitlements */,
-				27F89D75207DCF0200EA588C /* GoogleService-Info.plist */,
 				27F89D47207DC45000EA588C /* AppDelegate.swift */,
 				27F89D4B207DC45000EA588C /* Main.storyboard */,
 				27F89D77207DD07300EA588C /* Login.storyboard */,
@@ -497,7 +494,6 @@
 			files = (
 				274B5AB6209F12F900EFFBFD /* WorkSans-SemiBold.ttf in Resources */,
 				27F89D52207DC45000EA588C /* LaunchScreen.storyboard in Resources */,
-				27F89D76207DCF0200EA588C /* GoogleService-Info.plist in Resources */,
 				27DE6F6E207F674C006482E7 /* AcceptRideViewController.xib in Resources */,
 				274B5AB3209F12F900EFFBFD /* WorkSans-Regular.ttf in Resources */,
 				27F89D4F207DC45000EA588C /* Assets.xcassets in Resources */,

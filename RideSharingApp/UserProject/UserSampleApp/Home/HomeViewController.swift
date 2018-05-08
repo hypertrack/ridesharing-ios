@@ -217,8 +217,9 @@ class HomeViewController: UIViewController, HTPlaceSelectionDelegate, HTUseCaseN
          String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + <your_latitude>+ "," + <your_longitude>
          + "&radius=500&type=restaurant&key=<your_google_maps_key>";
          */
+        //TODO: Google Places API Key
         let coordinates = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
-        let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(coordinates)&radius=500&type=restaurant&key=AIzaSyAfV3N5sQtp3wUS9kYq0YD54ZyL-_L81IE"
+        let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(coordinates)&radius=500&type=restaurant&key="
         let url = URL.init(string: urlString)
         let session = URLSession.shared
         var request = URLRequest(url: url!)
@@ -240,13 +241,11 @@ class HomeViewController: UIViewController, HTPlaceSelectionDelegate, HTUseCaseN
                 }
                 if httpResponse.statusCode == 200 {
                     print(result)
-                    //TODO: Data Parsing and showing it in map.
                     self?.showCars(forResult: result)
                 }
             }
         }
         task.resume()
-        
     }
     
     private func showCars(forResult result: NSDictionary) {
