@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		09F7F770F283800E52343B18 /* Pods_DriverSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B545B21E3BCCB86695243904 /* Pods_DriverSampleApp.framework */; };
 		27030A1F20899B320067C781 /* TripWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27030A1E20899B310067C781 /* TripWorker.swift */; };
-		272FD2F92085AB8800A92064 /* TripUseCaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272FD2F82085AB8800A92064 /* TripUseCaseHandler.swift */; };
 		274B5AB3209F12F900EFFBFD /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 274B5AAF209F12F800EFFBFD /* WorkSans-Regular.ttf */; };
 		274B5AB4209F12F900EFFBFD /* WorkSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 274B5AB0209F12F800EFFBFD /* WorkSans-Medium.ttf */; };
 		274B5AB5209F12F900EFFBFD /* WorkSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 274B5AB1209F12F900EFFBFD /* WorkSans-Bold.ttf */; };
@@ -69,7 +68,6 @@
 
 /* Begin PBXFileReference section */
 		27030A1E20899B310067C781 /* TripWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripWorker.swift; sourceTree = "<group>"; };
-		272FD2F82085AB8800A92064 /* TripUseCaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripUseCaseHandler.swift; sourceTree = "<group>"; };
 		274B5AAF209F12F800EFFBFD /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Regular.ttf"; sourceTree = "<group>"; };
 		274B5AB0209F12F800EFFBFD /* WorkSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Medium.ttf"; sourceTree = "<group>"; };
 		274B5AB1209F12F900EFFBFD /* WorkSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WorkSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 		272FD2F72085AB7000A92064 /* OnRideUseCase */ = {
 			isa = PBXGroup;
 			children = (
-				272FD2F82085AB8800A92064 /* TripUseCaseHandler.swift */,
 				2770D38E20906668000517C1 /* UserDetailsSmallView.swift */,
 				2770D39020906675000517C1 /* UserDetailsSmallView.xib */,
 				2770D38A20904CDA000517C1 /* UserDetailsView.swift */,
@@ -647,7 +644,6 @@
 				27DE6F732080AF32006482E7 /* Trip.swift in Sources */,
 				2770D38F20906668000517C1 /* UserDetailsSmallView.swift in Sources */,
 				27F89D8B207E262600EA588C /* HomeViewController.swift in Sources */,
-				272FD2F92085AB8800A92064 /* TripUseCaseHandler.swift in Sources */,
 				27030A1F20899B320067C781 /* TripWorker.swift in Sources */,
 				27A87AC0209804A8002CA79C /* TripTrackingUseCaseHandler.swift in Sources */,
 				2770D38B20904CDA000517C1 /* UserDetailsView.swift in Sources */,

@@ -30,6 +30,16 @@ enum ActionStatusKeys: String {
     case canceled    = "canceled"
 }
 
+enum TripState {
+    case arriving           // before pickup
+    case arrivingNow        // near pickup
+    case started            // trip started
+    case arrived            // reached destination
+    case completed          // trip completed
+    case undefined          // dont know
+}
+
+
 class TripTrackingUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProtocol {
     
     var delegate: HTBottomViewUseCaseDelegate?
