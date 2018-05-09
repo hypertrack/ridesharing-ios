@@ -755,7 +755,7 @@
 				INFOPLIST_FILE = UserSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hypertrack.UserSampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hypertrack.uber-consumer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -773,7 +773,7 @@
 				INFOPLIST_FILE = UserSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hypertrack.UserSampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hypertrack.uber-consumer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
