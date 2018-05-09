@@ -84,10 +84,20 @@ class DataService: NSObject {
                 // For development environment, and easy testing
                 // making one to one mapping of driver and rider
                 // poking only that driver which has same phone no as user
-                
+                // set this value as true
+                let searchSameNumber = false
                 if isOnRide == false {
                     // driver which is not on ride found
-                    if phone == user.phone {
+                    if searchSameNumber == true {
+                        if phone == user.phone {
+                            // our driver found
+                            driverId = driver.key
+                            driverName = driverDict.value(forKey: "name") as? String
+                            carDetails = driverDict.value(forKey: "car_details") as? String
+                            driverPhone = phone
+                            break
+                        }
+                    } else {
                         // our driver found
                         driverId = driver.key
                         driverName = driverDict.value(forKey: "name") as? String
