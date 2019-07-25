@@ -208,7 +208,7 @@ class TripTrackingUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProt
         //4. User Detail View
         //TODO: User view padding
         //userView.topAnchor.constraint(equalTo: innerStackView!.topAnchor, constant: 23).isActive = true
-        userDetailView = Bundle.main.loadNibNamed("UserDetailsView", owner: self, options: nil)?.first as! UserDetailsView
+        userDetailView = (Bundle.main.loadNibNamed("UserDetailsView", owner: self, options: nil)?.first as! UserDetailsView)
         userDetailView?.backgroundColor = UIColor.clear
         userDetailView?.isHidden = true
         userDetailView?.feed(fromTrip: trip)
@@ -217,7 +217,7 @@ class TripTrackingUseCaseHandler: NSObject, HTOrderTrackingStackViewProviderProt
         }
         stackView.addArrangedSubview(userDetailView!)
         
-        userDetailSmallView = Bundle.main.loadNibNamed("UserDetailsSmallView", owner: self, options: nil)?.first as! UserDetailsSmallView
+        userDetailSmallView = (Bundle.main.loadNibNamed("UserDetailsSmallView", owner: self, options: nil)?.first as! UserDetailsSmallView)
         userDetailSmallView?.backgroundColor = UIColor.clear
         userDetailSmallView?.isHidden = true
         userDetailSmallView?.feed(fromTrip: trip)

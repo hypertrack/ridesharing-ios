@@ -34,7 +34,6 @@
 		27F89D4D207DC45000EA588C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F89D4B207DC45000EA588C /* Main.storyboard */; };
 		27F89D4F207DC45000EA588C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F89D4E207DC45000EA588C /* Assets.xcassets */; };
 		27F89D52207DC45000EA588C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F89D50207DC45000EA588C /* LaunchScreen.storyboard */; };
-		27F89D5D207DC45000EA588C /* DriverSampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D5C207DC45000EA588C /* DriverSampleAppTests.swift */; };
 		27F89D68207DC45000EA588C /* DriverSampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D67207DC45000EA588C /* DriverSampleAppUITests.swift */; };
 		27F89D79207DD07300EA588C /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F89D77207DD07300EA588C /* Login.storyboard */; };
 		27F89D7E207DD11400EA588C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D7D207DD11400EA588C /* LoginViewController.swift */; };
@@ -45,8 +44,9 @@
 		27F89D92207E2D7C00EA588C /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D91207E2D7C00EA588C /* Router.swift */; };
 		27F89D9A207E308700EA588C /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D99207E308700EA588C /* Driver.swift */; };
 		27F89D9C207F20A700EA588C /* LookingForRideUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D9B207F20A700EA588C /* LookingForRideUseCase.swift */; };
-		44DBDCC1D5DCCFFBFB652B3D /* Pods_DriverSampleAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D0E90B90576D01301F9812 /* Pods_DriverSampleAppTests.framework */; };
 		AE151A64C4442D82D308FEBC /* Pods_DriverSampleAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F73DDDFAD7B06AFA539601A /* Pods_DriverSampleAppUITests.framework */; };
+		C7DE715A22EA591600E635CB /* HyperTrack_Driver_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE715922EA591600E635CB /* HyperTrack_Driver_AppTests.swift */; };
+		C7DE716122EA597E00E635CB /* DriverSampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F89D5C207DC45000EA588C /* DriverSampleAppTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +58,13 @@
 			remoteInfo = DriverSampleApp;
 		};
 		27F89D64207DC45000EA588C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F89D3C207DC45000EA588C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27F89D43207DC45000EA588C;
+			remoteInfo = DriverSampleApp;
+		};
+		C7DE715C22EA591600E635CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 27F89D3C207DC45000EA588C /* Project object */;
 			proxyType = 1;
@@ -120,6 +127,9 @@
 		7B4FEAEF9F675E0143C90062 /* Pods-DriverSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DriverSampleApp.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DriverSampleApp/Pods-DriverSampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		B3E18FF3520F26952F2D45E9 /* Pods-DriverSampleAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DriverSampleAppUITests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DriverSampleAppUITests/Pods-DriverSampleAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B545B21E3BCCB86695243904 /* Pods_DriverSampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DriverSampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7DE715722EA591600E635CB /* HyperTrack Driver AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HyperTrack Driver AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7DE715922EA591600E635CB /* HyperTrack_Driver_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperTrack_Driver_AppTests.swift; sourceTree = "<group>"; };
+		C7DE715B22EA591600E635CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +145,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44DBDCC1D5DCCFFBFB652B3D /* Pods_DriverSampleAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +153,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE151A64C4442D82D308FEBC /* Pods_DriverSampleAppUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7DE715422EA591600E635CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +233,7 @@
 				27F89D46207DC45000EA588C /* DriverSampleApp */,
 				27F89D5B207DC45000EA588C /* DriverSampleAppTests */,
 				27F89D66207DC45000EA588C /* DriverSampleAppUITests */,
+				C7DE715822EA591600E635CB /* HyperTrack Driver AppTests */,
 				27F89D45207DC45000EA588C /* Products */,
 				B15D8EEFAEB6BDF53458A365 /* Pods */,
 				C1CD94DD29EA1DA93A6B1DF3 /* Frameworks */,
@@ -229,6 +246,7 @@
 				27F89D44207DC45000EA588C /* HyperTrack Driver App.app */,
 				27F89D58207DC45000EA588C /* DriverSampleAppTests.xctest */,
 				27F89D63207DC45000EA588C /* DriverSampleAppUITests.xctest */,
+				C7DE715722EA591600E635CB /* HyperTrack Driver AppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -369,6 +387,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C7DE715822EA591600E635CB /* HyperTrack Driver AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7DE715922EA591600E635CB /* HyperTrack_Driver_AppTests.swift */,
+				C7DE715B22EA591600E635CB /* Info.plist */,
+			);
+			path = "HyperTrack Driver AppTests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -430,14 +457,32 @@
 			productReference = 27F89D63207DC45000EA588C /* DriverSampleAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		C7DE715622EA591600E635CB /* HyperTrack Driver AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7DE716022EA591600E635CB /* Build configuration list for PBXNativeTarget "HyperTrack Driver AppTests" */;
+			buildPhases = (
+				C7DE715322EA591600E635CB /* Sources */,
+				C7DE715422EA591600E635CB /* Frameworks */,
+				C7DE715522EA591600E635CB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7DE715D22EA591600E635CB /* PBXTargetDependency */,
+			);
+			name = "HyperTrack Driver AppTests";
+			productName = "HyperTrack Driver AppTests";
+			productReference = C7DE715722EA591600E635CB /* HyperTrack Driver AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		27F89D3C207DC45000EA588C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Ashish Asawa";
 				TargetAttributes = {
 					27F89D43207DC45000EA588C = {
@@ -462,6 +507,11 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 27F89D43207DC45000EA588C;
 					};
+					C7DE715622EA591600E635CB = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 27F89D43207DC45000EA588C;
+					};
 				};
 			};
 			buildConfigurationList = 27F89D3F207DC45000EA588C /* Build configuration list for PBXProject "DriverSampleApp" */;
@@ -480,6 +530,7 @@
 				27F89D43207DC45000EA588C /* DriverSampleApp */,
 				27F89D57207DC45000EA588C /* DriverSampleAppTests */,
 				27F89D62207DC45000EA588C /* DriverSampleAppUITests */,
+				C7DE715622EA591600E635CB /* HyperTrack Driver AppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -514,6 +565,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		27F89D61207DC45000EA588C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7DE715522EA591600E635CB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -668,7 +726,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27F89D5D207DC45000EA588C /* DriverSampleAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +734,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				27F89D68207DC45000EA588C /* DriverSampleAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7DE715322EA591600E635CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7DE715A22EA591600E635CB /* HyperTrack_Driver_AppTests.swift in Sources */,
+				C7DE716122EA597E00E635CB /* DriverSampleAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +758,11 @@
 			isa = PBXTargetDependency;
 			target = 27F89D43207DC45000EA588C /* DriverSampleApp */;
 			targetProxy = 27F89D64207DC45000EA588C /* PBXContainerItemProxy */;
+		};
+		C7DE715D22EA591600E635CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27F89D43207DC45000EA588C /* DriverSampleApp */;
+			targetProxy = C7DE715C22EA591600E635CB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -737,6 +808,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -744,6 +816,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -794,6 +867,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -801,6 +875,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -880,7 +955,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DriverSampleApp.app/DriverSampleApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HyperTrack Driver App.app/HyperTrack Driver App";
 			};
 			name = Debug;
 		};
@@ -898,7 +973,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DriverSampleApp.app/DriverSampleApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HyperTrack Driver App.app/HyperTrack Driver App";
 			};
 			name = Release;
 		};
@@ -933,6 +1008,45 @@
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = DriverSampleApp;
+			};
+			name = Release;
+		};
+		C7DE715E22EA591600E635CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H4925W78YQ;
+				INFOPLIST_FILE = "HyperTrack Driver AppTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "hypertrack.HyperTrack-Driver-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HyperTrack Driver App.app/HyperTrack Driver App";
+			};
+			name = Debug;
+		};
+		C7DE715F22EA591600E635CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H4925W78YQ;
+				INFOPLIST_FILE = "HyperTrack Driver AppTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "hypertrack.HyperTrack-Driver-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HyperTrack Driver App.app/HyperTrack Driver App";
 			};
 			name = Release;
 		};
@@ -971,6 +1085,15 @@
 			buildConfigurations = (
 				27F89D73207DC45000EA588C /* Debug */,
 				27F89D74207DC45000EA588C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7DE716022EA591600E635CB /* Build configuration list for PBXNativeTarget "HyperTrack Driver AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7DE715E22EA591600E635CB /* Debug */,
+				C7DE715F22EA591600E635CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
