@@ -529,7 +529,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/../Pods/Target Support Files/Pods-DriverSampleApp/Pods-DriverSampleApp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DriverSampleApp/Pods-DriverSampleApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -556,7 +556,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-DriverSampleApp/Pods-DriverSampleApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DriverSampleApp/Pods-DriverSampleApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		693AB15229FBEB6D49DE3828 /* [CP] Check Pods Manifest.lock */ = {
@@ -619,7 +619,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/../Pods/Target Support Files/Pods-DriverSampleApp/Pods-DriverSampleApp-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DriverSampleApp/Pods-DriverSampleApp-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebasePhoneAuthUI.bundle",
 			);
@@ -630,7 +630,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-DriverSampleApp/Pods-DriverSampleApp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DriverSampleApp/Pods-DriverSampleApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
