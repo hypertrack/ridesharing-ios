@@ -1,20 +1,11 @@
-# Uber-for-X driver & customer apps using HyperTrack SDK
-
-**🛑WARNING: THIS SAMPLE APPLICATION IS DEPRECATED - IT ISN'T WORKING. WE'RE WORKING ON AN IMPROVED PLATFORM AND PLAN TO UPDATE THIS REPO AS SOON AS POSSIBLE.**
-
-[Please cast your vote](https://hypertrack.canny.io/feature-requests/p/update-sample-apps-to-new-v3-architecture) if you would like to use this sample app and we'll prioritize it accordingly.
-
--------
+# Uber-for-X driver & rider apps using HyperTrack SDK
 
 Uber’s business model has given rise to a large number of Uber-for-X services. Among other things, X equals moving, parking, courier, groceries, flowers, alcohol, dog walks, massages, dry cleaning, vets, medicines, car washes, roadside assistance and marijuana. Through these on-demand platforms, supply and demand are aggregated online for services to be fulfilled offline.
 
 This open source repo/s uses HyperTrack SDK for developing real world Uber-like consumer & driver apps.
 
- - **Uber-for-X Consumer app** can be used by customer to :
-      - Login/signup customer using Firebase phone-number authentication
-      - Show available cars near customer's current location
+ - **Uber-for-X Rider app** can be used by customer to :
       - Allow customer to select pickup and dropoff location
-      - Show estimated fare and route for selected pickup and dropoff location
       - Book a ride from desired pickup and dropoff location
       - Track driver to customer's pickup location
       - Track the ongoing ride to dropoff location
@@ -29,7 +20,6 @@ This open source repo/s uses HyperTrack SDK for developing real world Uber-like 
 
 
 - **Uber-for-X Driver app** can be used by driver to :
-     - Login/signup driver using Firebase phone-number authentication
      - Find new rides
      - Accept a ride
      - Track and navigate till customer's pickup location, and mark the pickup as complete
@@ -46,45 +36,304 @@ This open source repo/s uses HyperTrack SDK for developing real world Uber-like 
 ## How to Begin
 
 ### 1. Get your keys
- - [Signup](https://dashboard.hypertrack.com/signup?utm_source=github&utm_campaign=uber_for_x_iOS) to get your [HyperTrack API keys](https://dashboard.hypertrack.com/settings)
+ - [Signup](https://dashboard.hypertrack.com/signup) to get your [HyperTrack Publishable Key](https://dashboard.hypertrack.com/setup)
 
-### 2. Set up consumer & driver app
+### 2. Set up rider & driver app
 ```bash
 # Clone this repository
-$ git clone https://github.com/hypertrack/uber_for_x_iOS.git
+$ git clone https://github.com/hypertrack/uber-for-x-ios.git
 
-# Go into the repository
-$ cd uber_for_x_iOS/RideSharingApp
+# cd into the project directory
+$ cd uber-for-x-ios
 
 # Install dependencies
 $ pod install
 ```
 
-- Open RideSharingApp.xcworkspace
-- Add the publishable key to initialHyperTrackSetup() function in UserSampleApp AppDelegate.swift file and DriverSampleApp AppDelegate.swift file
+- Open UberForX.xcworkspace
+- Add the publishable key to Utility > [`Interface.swift`](https://github.com/hypertrack/uber-for-x-ios/blob/1ace0df686da20291e244e37bbb6754d735faee8/Utility/Interface.swift#L10) > `let publishableKey` constant
 ```swift
-HyperTrack.initialize("YOUR_PUBLISHABLE_KEY")
+public let publishableKey: String = "YOUR_PUBLISHABLE_KEY_HERE"
 ```
-- Change the bundle identifiers of both apps as per your requirements.
 
-### 3. Set up Firebase Realtime Database
- - Setup Firebase Realtime Database. For detail steps refer following link https://firebase.google.com/docs/ios/setup
- - Both Apps uses Firebase Phone Authentication. Complete the setup for same. https://firebase.google.com/docs/auth/ios/phone-auth
-
- - Note that Firebase Realtime Database is _not required_ to use HyperTrack SDK. You may have your own server that is connected to your apps
-
+### 3. Set up Firebase
+ - Setup Firebase. For detail steps refer following link https://firebase.google.com/docs/ios/setup
+ - Register Driver app with `com.hypertrack.ios.uberx.driver.github` bundle ID and Rider app with `com.hypertrack.ios.uberx.rider.github` bundle ID.
+ - Move `GoogleService-Info.plist` files to the Driver and Rider app targets
+ - [Follow instructions](https://github.com/hypertrack/uber-for-x-firebase) to setup Firebase Cloud Functions that act as a backend, interacting with HyperTrack APIs.
+ - Note that Firebase Cloud Firestore and Cloud Functions are _not required_ to use HyperTrack SDKs. You may have your own server that is connected to your apps.
 
 ### 4. Tracking
 
 - In these samples apps, Driver app creates actions for pickup and drop, which are tracked by Driver & Consumer apps.
 
 ## Documentation
-For detailed documentation of the APIs, customizations and what all you can build using HyperTrack, please visit the official [docs](https://www.hypertrack.com/docs).
+For detailed documentation of the APIs, customizations and what all you can build using HyperTrack, please visit the official [docs](https://docs.hypertrack.com).
+
+## How Uber-for-X uses HyperTrack SDK
+
+Uber-for-X Driver app uses HyperTrack SDK to track driver's position in 3 cases:
+- When app is active to display all drivers locations on riders maps
+- When driver is picking up rider
+- When driver is dropping off rider
+
+You can find the SDK documentation [here](https://github.com/hypertrack/quickstart-ios). 
+
+### Silent push notifications
+
+Driver app integrates HyperTrack SDK with silent push notifictions to:
+- Start tracking location immediately when Firebase creates a trip for accepted order
+- Stop tracking location when app is backgrounded and there are no trips lift
+
+HyperTrack SDK has four methods to integrate silent push notifications:
+- `registerForRemoteNotifications()`, registers the app in OS to receive notifications
+- `didRegisterForRemoteNotificationsWithDeviceToken(_:)` to transfer device token to HyperTrack SDK
+- `didFailToRegisterForRemoteNotificationsWithError(_:)` to signal failure to register for remote notifications
+- `didReceiveRemoteNotification(_:fetchCompletionHandler:)` transfers silent push notification to HyperTrack SDK
+
+Here is how they are integrated in Driver app:
+```swift
+ func application(
+    _: UIApplication,
+    didFinishLaunchingWithOptions
+    _: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+    /// Register for remote notifications to allow bi-directional communication model with the
+    /// server. This enables the SDK to run on a variable frequency model, which balances the
+    /// fine trade-off between low latency tracking and battery efficiency, and improves robustness.
+    /// This includes the methods below in the Remote Notifications section
+    HyperTrack.registerForRemoteNotifications()
+    /// Configure Firebase
+    FirebaseApp.configure()
+    return true
+  }
+
+  func application(
+    _: UIApplication,
+    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+  ) {
+    HyperTrack.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+  }
+
+  func application(
+    _: UIApplication,
+    didFailToRegisterForRemoteNotificationsWithError error: Error
+  ) {
+    HyperTrack.didFailToRegisterForRemoteNotificationsWithError(error)
+  }
+
+  func application(
+    _: UIApplication,
+    didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+    fetchCompletionHandler completionHandler:
+    @escaping (UIBackgroundFetchResult) -> Void
+  ) {
+    HyperTrack.didReceiveRemoteNotification(
+      userInfo,
+      fetchCompletionHandler: completionHandler
+    )
+  }
+```
+
+### SDK Initialization
+
+HyperTrack SDK initializes successfully when nothing prevents it from tracking. This is modeled by `Result` type. Here, in Driver app, when `Result` is `.success` we present one UI and when it's `.failure` another. This ensures that UI that get initialized SDK won't get null, and can use the SDK freely, and UIs designed for error handling won't get SDK at all, and will only display errors.
+
+```swift
+switch HyperTrack.makeSDK(
+  publishableKey: HyperTrack.PublishableKey(getPublishableKeyfromPlist())!
+) {
+  case let .success(hypertrack):
+    let store = Store(
+      initialValue: AppState(),
+      reducer: appReducer
+    )
+    let dataflow = DriverDataFlow(store: store, hypertrack: hypertrack)
+    return AnyView(ContentView(
+      store: store,
+      dataflow: dataflow,
+      hypertrack: hypertrack
+    ))
+  case let .failure(error):
+    switch error {
+      case let .developmentError(devError):
+        fatalError("\(devError)")
+      case let .productionError(prodError):
+        return AnyView(ErrorView(store: Store(
+          initialValue: AppState(),
+          reducer: appReducer
+        ), error: HError(error: prodError)))
+    }
+}
+```
+
+### DeviceID
+
+DeviceID is used to identify a device on HyperTrack. Driver app uses this ID when creating a user in Firebase.
+
+```swift
+private func makeNewUser() {
+  let user = User(
+    id: nil,
+    role: .driver,
+    name: name,
+    phone_number: phone,
+    device_id: hypertrack.deviceID,
+    car: User.Car(model: carModel, license_plate: carPlate)
+  )
+  setNewFirestoreUser(db, user) { result in
+    switch result {
+      case let .success(user):
+        self.makeHTUser(user)
+        self.store.value.user = user
+        self.store.update(.permissions)
+      case let .failure(error):
+        print("An error occurred: \(error)")
+    }
+  }
+}
+```
+
+Later in Views SDK snippets, both Driver and Rider app are using this ID to display driver on a map.
+
+### Device name and metadata
+
+Device name and metadata are displayed in HyperTrack's [dashboard](https://dashboard.hypertrack.com). To make it easy for operators to find drivers by their name or filter them by metadata, Driver app sets those fields using User model from Firebase:
+
+```swift
+private func makeHTUser(_ user: User) {
+  
+  let id = user.id ?? ""
+  let name = user.id ?? ""
+  let phoneNumber = user.phone_number ?? ""
+  let carModel = user.car?.model ?? ""
+  let carLicensePlate = user.car?.license_plate ?? ""
+  let car = ["model": carModel, "license_plate": carLicensePlate]
+  
+  hypertrack.setDeviceName(user.name)
+  if let metadata = HyperTrack.Metadata(dictionary: [
+    "user_id": id,
+    "name": name,
+    "phone_number": phoneNumber,
+    "car": car
+  ]) {
+    hypertrack.setDeviceMetadata(metadata)
+  }
+}
+```
+
+### Start tracking and sync device settings
+
+Driver app tracks the driver in an interesting way. We want to always track driver when the app is running in foreground. This allows us to show cars of available drivers in Rider app's map. At the same time we want to track drivers in background only when they have an active order. In this snippet we subscribe to OS notifications and call `start()` tracking when app is brought to foreground. But when the app is going into background we consult with `syncDeviceSettings()` to stop tracking if driver doesn't have active trips.
+
+```swift
+.onReceive(appStateReceiver.$notification) { notification in
+  switch(notification.name, self.store.value.user) {
+    case (UIApplication.didBecomeActiveNotification, let user):
+      self.hypertrack.start()
+    case (UIApplication.didEnterBackgroundNotification, _):
+      self.hypertrack.syncDeviceSettings()
+    default: break
+  }
+}
+```
+
+## How Uber-for-X uses Views SDK
+
+Both Rider and Driver apps use [HyperTrackViews SDK](https://github.com/hypertrack/views-ios) to display realtime location and trip updates on a map.
+
+### Subscribing to location updates
+
+Both Driver and Rider apps subscribe to driver's location updates using `subscribeToMovementStatusUpdates(for:completionHandler:)` method:
+
+```swift
+func createUserMovementStatusSubscription() {
+  ht_cancelable =
+    hyperTrackViews.subscribeToMovementStatusUpdates(
+      for: self.hypertrack.deviceID,
+      completionHandler: { [weak self] result in
+        guard let self = self else { return }
+        switch result {
+          case let .success(movementStatus):
+            self.movementStatusWillChange.send(movementStatus)
+            self.getTripSummary()
+          case let .failure(error):
+            dump(error)
+            self.createUserMovementStatusSubscription()
+        }
+      }
+    )
+}
+```
+
+### Placing device or trip on a map
+
+MapKit part of the library can put any `CLLocation` as devices location.
+
+Driver's location is taken from MovementStatus:
+
+```swift
+private func configureForNewState(_ mapView: MKMapView) {
+  removeAllAnnotationExceptDeviceAnnotation(mapView: mapView)
+  mapView.addAnnotations(dataflow.orderList.map { OrderAnnotation(order: $0) } )
+  if let movementStatus = self.movementStatus {
+    put(.location(movementStatus.location), onMapView: mapView)
+  }
+}
+```
+
+Rider's location is taken from the map itself:
+
+```swift
+private func configureForLookingState(_ mapView: MKMapView) {
+  guard let location = self.location else { return }
+  put(.location(location), onMapView: mapView)
+}
+```
+
+When driver is picking up or dropping off rider, the estimated route is displayed. This route comes from a trip, and `.locationWithTrip` enum is used to display both driver's current position and his route to destination:
+
+```swift
+private func configureForDrivingState(_ mapView: MKMapView) {
+  if let device = self.dataflow.userMovementStatus, let trip = mStatus.trips.first(
+    where: { $0.id == self.dataflow.store.value.order?.trip_id }
+  ) {
+    put(.locationWithTrip(device.location, trip), onMapView: mapView)
+  } else {
+    configureForLookingState(mapView)
+  }
+}
+```
+
+### Making the device or trip center on a map
+
+In apps that show tracking data, usually user needs to see all the data on the screen, be it current location, trip polylines or destination markers. This view needs to re-zoom with animation every time the data is changing. This is done in the real Uber app.
+
+We also don't want to auto-zoom if user touched the map and zoomed in to his location of choise. In this snippet a private function decides, based on user's input, if auto-zoom is needed and uses our Views function (`zoom(withMapInsets:interfaceInsets:onMapView:)`) that understands what is shown on the screen (be it current location, trip or summary) and auto-zooms on it.
+
+This function can take different values for insets based on distance in meters (here we are making an inset for 100 meters in all directions, so elements won't touch the screen. But also there are cases where UI elements are shown on top of our map, and in those cases we don't want to accidentally miss relevent data under those elemets. For those cases the zoom function has interfaceInsets parameter.
+
+In this case we have a card at the bottom 250 points in height, and a statusbar element at the top for 10 points.
+
+```swift
+private func isZoomNeeded(_ mapView: MKMapView) {
+  if self.isAutoZoomEnabled {
+    zoom(
+      withMapInsets: .all(100),
+      interfaceInsets: .custom(
+        top: 10,
+        leading: 10,
+        bottom: 250,
+        trailing: 10),
+      onMapView: mapView)
+  }
+}
+```
 
 ## Contribute
-Feel free to clone, use, and contribute back via [pull requests](https://help.github.com/articles/about-pull-requests/). We'd love to see your pull requests - send them in! Please use the [issues tracker](https://github.com/hypertrack/uberx-android/issues) to raise bug reports and feature requests.
+Feel free to clone, use, and contribute back via [pull requests](https://help.github.com/articles/about-pull-requests/). We'd love to see your pull requests - send them in! Please use the [issues tracker](https://github.com/hypertrack/uber-for-x-ios/issues) to raise bug reports and feature requests.
 
 We are excited to see what live location feature you build in your app using this project. Do ping us at help@hypertrack.com once you build one, and we would love to feature your app on our blog!
 
 ## Support
-Join our [Slack community](https://join.slack.com/t/hypertracksupport/shared_invite/enQtNDA0MDYxMzY1MDMxLTdmNDQ1ZDA1MTQxOTU2NTgwZTNiMzUyZDk0OThlMmJkNmE0ZGI2NGY2ZGRhYjY0Yzc0NTJlZWY2ZmE5ZTA2NjI) for instant responses, or interact with our growing [community](https://community.hypertrack.com). You can also email us at help@hypertrack.com.
+Join our [Slack community](https://join.slack.com/t/hypertracksupport/shared_invite/enQtNDA0MDYxMzY1MDMxLTdmNDQ1ZDA1MTQxOTU2NTgwZTNiMzUyZDk0OThlMmJkNmE0ZGI2NGY2ZGRhYjY0Yzc0NTJlZWY2ZmE5ZTA2NjI) for instant responses. You can also email us at help@hypertrack.com.

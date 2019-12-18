@@ -1,0 +1,19 @@
+# Format options
+## General
+--commas inline
+--header strip
+--semicolons never
+## Indentation
+--indent 2
+--indentcase true
+--xcodeindentation enabled
+## Wrapping
+--maxwidth 80
+--wrapcollections before-first
+--wraparguments before-first
+
+# File options
+--exclude Pods
+
+# Rules
+--enable isEmpty
