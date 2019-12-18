@@ -51,7 +51,7 @@ $ pod install
 ```
 
 - Open UberForX.xcworkspace
-- Add the publishable key to Utility > [`Interface.swift`](https://github.com/hypertrack/uber-for-x-ios/blob/1ace0df686da20291e244e37bbb6754d735faee8/Utility/Interface.swift#L10) > `let publishableKey` constant
+- Add the publishable key to Utility > [`Interface.swift`](https://github.com/hypertrack/uber-for-x-ios/blob/e46306c06e3f8b0d9a7372ef15663dc509451b1e/Utility/Interface.swift#L10) > `let publishableKey` constant
 ```swift
 public let publishableKey: String = "YOUR_PUBLISHABLE_KEY_HERE"
 ```
