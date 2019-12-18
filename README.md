@@ -60,6 +60,7 @@ public let publishableKey: String = "YOUR_PUBLISHABLE_KEY_HERE"
  - Setup Firebase. For detail steps refer following link https://firebase.google.com/docs/ios/setup
  - Register Driver app with `com.hypertrack.ios.uberx.driver.github` bundle ID and Rider app with `com.hypertrack.ios.uberx.rider.github` bundle ID.
  - Move `GoogleService-Info.plist` files to the Driver and Rider app targets
+ - Create Cloud Firestore database in test mode by following the first step from this guide https://firebase.google.com/docs/firestore/quickstart
  - [Follow instructions](https://github.com/hypertrack/uber-for-x-firebase) to setup Firebase Cloud Functions that act as a backend, interacting with HyperTrack APIs.
  - Note that Firebase Cloud Firestore and Cloud Functions are _not required_ to use HyperTrack SDKs. You may have your own server that is connected to your apps.
 
