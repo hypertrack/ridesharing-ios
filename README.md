@@ -1,5 +1,9 @@
 # Ridesharing driver & rider sample apps using HyperTrack SDK
 
+<p align="center">
+  <img src="Images/Demo.gif" alt="Apps demo"/>
+</p>
+
 Uber’s business model has given rise to a large number of Uber-for-X services. Among other things, X equals moving, parking, courier, groceries, flowers, alcohol, dog walks, massages, dry cleaning, vets, medicines, car washes, roadside assistance and marijuana. Through these on-demand platforms, supply and demand are aggregated online for services to be fulfilled offline.
 
 This open source repo/s uses HyperTrack SDK for developing real world Uber-like consumer & driver apps.
@@ -46,7 +50,7 @@ $ git clone https://github.com/hypertrack/ridesharing-ios.git
 # cd into the project directory
 $ cd ridesharing-ios
 
-# Install dependencies
+# Install dependencies (can take a while)
 $ pod install
 ```
 
@@ -57,23 +61,57 @@ public let publishableKey: String = "YOUR_PUBLISHABLE_KEY_HERE"
 ```
 
 ### 3. Set up Firebase
- - Setup Firebase. For detail steps refer following link https://firebase.google.com/docs/ios/setup
- - Register Driver app with `com.hypertrack.ridesharing.driver.ios.github` bundle ID and Rider app with `com.hypertrack.ridesharing.rider.ios.github` bundle ID.
- - Move `GoogleService-Info.plist` files to the Driver and Rider app targets
- - Create Cloud Firestore database in test mode by following the first step from this guide https://firebase.google.com/docs/firestore/quickstart
- - [Follow instructions](https://github.com/hypertrack/ridesharing-firebase) to setup Firebase Cloud Functions that act as a backend, interacting with HyperTrack APIs.
+ - Create a Firebase project. For detail steps refer to _Step 1_: https://firebase.google.com/docs/ios/setup#create-firebase-project
+ - Register Driver app with `com.hypertrack.ridesharing.driver.ios.github` bundle ID and Rider app with `com.hypertrack.ridesharing.rider.ios.github` bundle ID. More details in _Step 2_: https://firebase.google.com/docs/ios/setup#register-app
+ - Move Driver app's `GoogleService-Info.plist` to the Driver app target and Rider's to Riders. Described in _Step 3_: https://firebase.google.com/docs/ios/setup#add-config-file No need to follow Step 4 and 5, they are already implemented in the app.
+ - Create Cloud Firestore database in test mode by following the "Create a Cloud Firestore database" section from this guide https://firebase.google.com/docs/firestore/quickstart#create No need to foolow other steps, they are already implemented in the app.
+ - Follow instructions in our [firebase repo](https://github.com/hypertrack/ridesharing-firebase) to setup Firebase Cloud Functions that act as a backend, interacting with HyperTrack APIs.
  - Note that Firebase Cloud Firestore and Cloud Functions are _not required_ to use HyperTrack SDKs. You may have your own server that is connected to your apps.
 
-### 4. Tracking
+### 4. Run the apps
 
-- In these samples apps, Driver app creates actions for pickup and drop, which are tracked by Driver & Consumer apps.
+- You can run the Rider app in Simulator, but Driver app needs to be run on-device due to Simulator's lack of motion hardware.
+- Being able to run the apps and signup means that the whole setup works.
+- In these samples apps, Driver app creates actions for pickup and drop, which are tracked by Driver & Rider apps. See [architecture](#architecture) for details.
 
 ## Documentation
 For detailed documentation of the APIs, customizations and what all you can build using HyperTrack, please visit the official [docs](https://docs.hypertrack.com).
 
-## How Uber-for-X uses HyperTrack SDK
+## Architecture
 
-Uber-for-X Driver app uses HyperTrack SDK to track driver's position in 3 cases:
+![Architecture](Images/Architecture.png)
+
+1. The driver app uses HyperTrack SDK ([iOS](https://github.com/hypertrack/quickstart-ios)/[Android](https://github.com/hypertrack/quickstart-android)) to send his location, name, and metadata to HyperTrack's servers.
+2. Driver and Rider apps use HyperTrack Views ([iOS](https://github.com/hypertrack/views-ios)/[Android](https://github.com/hypertrack/views-android)) to show the driver's current location and trip's route.
+3. Driver and Rider apps are subscribed to [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore) to sync users and orders between them.
+4. Firebase Cloud Functions react to the order status field in Cloud Firestore, create and complete trips using [HyperTrack APIs](https://docs.hypertrack.com/#guides-apis), listen to [HyperTrack Webhooks](https://docs.hypertrack.com/#guides-webhooks) and update the order status and trip fields with new results.
+
+<details>
+    <summary>Step by step process of communication:</summary>
+
+1. Driver sign-ups with his data. This
+    1. Creates a new document with driver's data in users collection in Cloud Firestore
+    2. Adds the name and metadata through HyperTrack SDK for the driver. HyperTrack SDK starts tracking the driver's location. From this point, the driver can be seen in HyperTrack Dashboard
+2. The driver is checking Cloud Firestore's orders collection periodically, looking for orders with the `NEW` status
+3. Rider sign-ups with his data. This creates a new document with rider's data in users collection in Cloud Firestore
+4. Rider chooses pickup and dropoff places, which creates a new order in orders collection in Cloud Firestore
+5. The driver is accepting this order, changing its status to `ACCEPTED` and setting his data in the order
+6.  This change triggers `updateOrderStatus` Firebase Cloud Function. The function creates a trip from the driver's current position to the rider's pickup point using HyperTrack API. Then it changes the order status to `PICKING_UP`.
+7. Driver and Rider apps are subscribed to their order. When they see that the status is `PICKING_UP`, they use HyperTrackViews SDK to display the trip from the order on a map.
+8. When a driver crosses destination geofence of the rider's pickup point, a webhook from HyperTrack to Firebase Cloud Function is triggered. This function updates the order to `REACHED_PICKUP` state.
+9. Upon receiving `REACHED_PICKUP` order state, the Driver app shows a "Start Trip" button. When the driver presses it, Driver app changes the order status to `STARTED_RIDE` state
+10. Upon receiving the `STARTED_RIDE` state, Firebase Cloud Function call HyperTrack APIs to complete the previous trip and create a new trip to the rider's destination. After the trip is created, the function updates the order status to `DROPPING_OFF`.
+11. When Driver and Rider apps see the `PICKING_UP` status, they use HyperTrackViews SDK to display the new trip on a map.
+12. When a driver crosses destination geofence of the rider's dropoff point, a webhook from HyperTrack to Firebase Cloud Function triggers again. This function updates the order to `REACHED_DROPOFF` state.
+13. Upon receiving `REACHED_DROPOFF` order state, the Driver app shows a "End Trip" button. When the driver presses it, Driver app changes the order status to `COMPLETED` state.
+14. Firebase Cloud Function completes the dropoff trip at this point.
+15. When this trip is completed, Rider and Driver app show trip summary using HyperTrackViews SDK.
+
+</details>
+
+## How Ridesharing sample apps use HyperTrack SDK
+
+Ridesharing Driver app uses HyperTrack SDK to track driver's position in 3 cases:
 - When app is active to display all drivers locations on riders maps
 - When driver is picking up rider
 - When driver is dropping off rider
@@ -239,7 +277,7 @@ Driver app tracks the driver in an interesting way. We want to always track driv
 }
 ```
 
-## How Uber-for-X uses Views SDK
+## How Ridesharing sample apps use Views SDK
 
 Both Rider and Driver apps use [HyperTrackViews SDK](https://github.com/hypertrack/views-ios) to display realtime location and trip updates on a map.
 
@@ -308,7 +346,7 @@ private func configureForDrivingState(_ mapView: MKMapView) {
 
 ### Making the device or trip center on a map
 
-In apps that show tracking data, usually user needs to see all the data on the screen, be it current location, trip polylines or destination markers. This view needs to re-zoom with animation every time the data is changing. This is done in the real Uber app.
+In apps that show tracking data, usually user needs to see all the data on the screen, be it current location, trip polylines or destination markers. This view needs to re-zoom with animation every time the data is changing. This is done in the Uber app.
 
 We also don't want to auto-zoom if user touched the map and zoomed in to his location of choise. In this snippet a private function decides, based on user's input, if auto-zoom is needed and uses our Views function (`zoom(withMapInsets:interfaceInsets:onMapView:)`) that understands what is shown on the screen (be it current location, trip or summary) and auto-zooms on it.
 

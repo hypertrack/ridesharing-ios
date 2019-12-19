@@ -29,7 +29,7 @@ public struct LoginView: View {
       Button(action: {
         self.store.update(.auth)
       }) {
-        Text("LOGIN")
+        Text("SIGNUP")
           .modifier(ButtonText())
       }
       .background(Color.black)
