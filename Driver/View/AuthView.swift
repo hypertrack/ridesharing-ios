@@ -67,7 +67,7 @@ struct AuthView: View {
       Text("Enter your name:")
         .fontWeight(.semibold)
       TextField("", text: self.$name)
-        .textFieldStyle(UberTextFieldStyle())
+        .textFieldStyle(RidesharingTextFieldStyle())
     }
   }
 
@@ -77,11 +77,11 @@ struct AuthView: View {
         .fontWeight(.semibold)
       HStack {
         TextField("Car model", text: self.$carModel)
-          .textFieldStyle(UberTextFieldStyle())
+          .textFieldStyle(RidesharingTextFieldStyle())
         Spacer()
           .frame(width: 20)
         TextField("Car plate", text: self.$carPlate)
-          .textFieldStyle(UberTextFieldStyle())
+          .textFieldStyle(RidesharingTextFieldStyle())
       }
     }
   }
@@ -92,7 +92,7 @@ struct AuthView: View {
         .fontWeight(.semibold)
       TextField("Phone number", text: self.$phone)
         .keyboardType(.phonePad)
-        .textFieldStyle(UberTextFieldStyle())
+        .textFieldStyle(RidesharingTextFieldStyle())
     }
   }
 

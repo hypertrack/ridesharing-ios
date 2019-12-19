@@ -4,7 +4,7 @@ import Foundation
 public struct User: Codable {
   /// unique identifier from Firestore sdk
   public var id: String?
-  /// User role depends on uber-for-x application type
+  /// User role depends on Ridesharing application type
   public let role: Role
   /// User name
   public let name: String

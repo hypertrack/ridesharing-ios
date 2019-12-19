@@ -19,7 +19,7 @@ public struct LoginView: View {
           Text("HyperTrack")
             .font(.system(size: 12))
             .fontWeight(.semibold)
-          Text("Uber for X")
+          Text("Ridesharing")
             .font(.system(size: 26))
             .fontWeight(.semibold)
         }.foregroundColor(.white)

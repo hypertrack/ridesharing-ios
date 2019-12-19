@@ -1,17 +1,17 @@
-# Uber-for-X driver & rider apps using HyperTrack SDK
+# Ridesharing driver & rider sample apps using HyperTrack SDK
 
 Uber’s business model has given rise to a large number of Uber-for-X services. Among other things, X equals moving, parking, courier, groceries, flowers, alcohol, dog walks, massages, dry cleaning, vets, medicines, car washes, roadside assistance and marijuana. Through these on-demand platforms, supply and demand are aggregated online for services to be fulfilled offline.
 
 This open source repo/s uses HyperTrack SDK for developing real world Uber-like consumer & driver apps.
 
- - **Uber-for-X Rider app** can be used by customer to :
+ - **Ridesharing Rider app** can be used by customer to :
       - Allow customer to select pickup and dropoff location
       - Book a ride from desired pickup and dropoff location
       - Track driver to customer's pickup location
       - Track the ongoing ride to dropoff location
       - Let customers share live trip with friends and family
       - Show trip summary with distance travelled
-      
+
 <p align="center">
  <a href="https://www.youtube.com/watch?v=1qMFP5w32GY">
   <img src="http://res.cloudinary.com/hypertrack/image/upload/v1525329669/customer.png" width="300"/>
@@ -19,13 +19,13 @@ This open source repo/s uses HyperTrack SDK for developing real world Uber-like 
 </p>
 
 
-- **Uber-for-X Driver app** can be used by driver to :
+- **Ridesharing Driver app** can be used by driver to :
      - Find new rides
      - Accept a ride
      - Track and navigate till customer's pickup location, and mark the pickup as complete
      - Track and navigate from customer's pickup to dropoff location, and mark the dropoff as complete
      - Show trip summary with distance travelled
-     
+
 <p align="center">
  <a href="https://www.youtube.com/watch?v=3R9GDQitt40">
   <img src="http://res.cloudinary.com/hypertrack/image/upload/v1525329669/driver.png" width="300"/>
@@ -41,27 +41,27 @@ This open source repo/s uses HyperTrack SDK for developing real world Uber-like 
 ### 2. Set up rider & driver app
 ```bash
 # Clone this repository
-$ git clone https://github.com/hypertrack/uber-for-x-ios.git
+$ git clone https://github.com/hypertrack/ridesharing-ios.git
 
 # cd into the project directory
-$ cd uber-for-x-ios
+$ cd ridesharing-ios
 
 # Install dependencies
 $ pod install
 ```
 
-- Open UberForX.xcworkspace
-- Add the publishable key to Utility > [`Interface.swift`](https://github.com/hypertrack/uber-for-x-ios/blob/e46306c06e3f8b0d9a7372ef15663dc509451b1e/Utility/Interface.swift#L10) > `let publishableKey` constant
+- Open Ridesharing.xcworkspace
+- Add the publishable key to Utility > [`Interface.swift`](https://github.com/hypertrack/ridesharing-ios/blob/e46306c06e3f8b0d9a7372ef15663dc509451b1e/Utility/Interface.swift#L10) > `let publishableKey` constant
 ```swift
 public let publishableKey: String = "YOUR_PUBLISHABLE_KEY_HERE"
 ```
 
 ### 3. Set up Firebase
  - Setup Firebase. For detail steps refer following link https://firebase.google.com/docs/ios/setup
- - Register Driver app with `com.hypertrack.ios.uberx.driver.github` bundle ID and Rider app with `com.hypertrack.ios.uberx.rider.github` bundle ID.
+ - Register Driver app with `com.hypertrack.ridesharing.driver.ios.github` bundle ID and Rider app with `com.hypertrack.ridesharing.rider.ios.github` bundle ID.
  - Move `GoogleService-Info.plist` files to the Driver and Rider app targets
  - Create Cloud Firestore database in test mode by following the first step from this guide https://firebase.google.com/docs/firestore/quickstart
- - [Follow instructions](https://github.com/hypertrack/uber-for-x-firebase) to setup Firebase Cloud Functions that act as a backend, interacting with HyperTrack APIs.
+ - [Follow instructions](https://github.com/hypertrack/ridesharing-firebase) to setup Firebase Cloud Functions that act as a backend, interacting with HyperTrack APIs.
  - Note that Firebase Cloud Firestore and Cloud Functions are _not required_ to use HyperTrack SDKs. You may have your own server that is connected to your apps.
 
 ### 4. Tracking
@@ -78,7 +78,7 @@ Uber-for-X Driver app uses HyperTrack SDK to track driver's position in 3 cases:
 - When driver is picking up rider
 - When driver is dropping off rider
 
-You can find the SDK documentation [here](https://github.com/hypertrack/quickstart-ios). 
+You can find the SDK documentation [here](https://github.com/hypertrack/quickstart-ios).
 
 ### Silent push notifications
 
@@ -203,14 +203,14 @@ Device name and metadata are displayed in HyperTrack's [dashboard](https://dashb
 
 ```swift
 private func makeHTUser(_ user: User) {
-  
+
   let id = user.id ?? ""
   let name = user.id ?? ""
   let phoneNumber = user.phone_number ?? ""
   let carModel = user.car?.model ?? ""
   let carLicensePlate = user.car?.license_plate ?? ""
   let car = ["model": carModel, "license_plate": carLicensePlate]
-  
+
   hypertrack.setDeviceName(user.name)
   if let metadata = HyperTrack.Metadata(dictionary: [
     "user_id": id,
@@ -332,7 +332,7 @@ private func isZoomNeeded(_ mapView: MKMapView) {
 ```
 
 ## Contribute
-Feel free to clone, use, and contribute back via [pull requests](https://help.github.com/articles/about-pull-requests/). We'd love to see your pull requests - send them in! Please use the [issues tracker](https://github.com/hypertrack/uber-for-x-ios/issues) to raise bug reports and feature requests.
+Feel free to clone, use, and contribute back via [pull requests](https://help.github.com/articles/about-pull-requests/). We'd love to see your pull requests - send them in! Please use the [issues tracker](https://github.com/hypertrack/ridesharing-ios/issues) to raise bug reports and feature requests.
 
 We are excited to see what live location feature you build in your app using this project. Do ping us at help@hypertrack.com once you build one, and we would love to feature your app on our blog!
 

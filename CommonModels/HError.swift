@@ -36,7 +36,7 @@ public struct HError {
         type = error
       case .motionActivityServicesDisabled:
         title = "Provide Motion & Fitness permissions"
-        subTitle = "Uber-for-X uses your movement to optimize battery usage. It will only send data when you are on the go. Please turon on  Motion & Fitness permissions for Uber-for-X in Settings.app > Privacy > Motion & Fitness"
+        subTitle = "Ridesharing uses your movement to optimize battery usage. It will only send data when you are on the go. Please turon on  Motion & Fitness permissions for Ridesharing in Settings.app > Privacy > Motion & Fitness"
         btTitle = "Give motion permission"
         settingDeepLink = "\(UIApplication.openSettingsURLString)/prefs:root=Privacy&path=MOTION"
         type = error
@@ -68,7 +68,7 @@ public struct HError {
         type = error
       case .motionActivityPermissionsDenied:
         title = "Provide Motion & Fitness permissions"
-        subTitle = "Uber-for-X uses your movement to optimize battery usage. It will only send data when you are on the go. Please turon on  Motion & Fitness permissions for Uber-for-X in Settings.app > Privacy > Motion & Fitness"
+        subTitle = "Ridesharing uses your movement to optimize battery usage. It will only send data when you are on the go. Please turon on  Motion & Fitness permissions for Ridesharing in Settings.app > Privacy > Motion & Fitness"
         btTitle = "Give motion permission"
         settingDeepLink = "\(UIApplication.openSettingsURLString)/prefs:root=Privacy&path=MOTION"
         type = error
@@ -86,7 +86,7 @@ public struct HError {
         type = error
       case .motionActivityServicesUnavalible, .motionActivityPermissionsDenied:
         title = "Provide Motion & Fitness permissions"
-        subTitle = "Uber-for-X uses your movement to optimize battery usage. It will only send data when you are on the go. Please turon on  Motion & Fitness permissions for Uber-for-X in Settings.app > Privacy > Motion & Fitness"
+        subTitle = "Ridesharing uses your movement to optimize battery usage. It will only send data when you are on the go. Please turon on  Motion & Fitness permissions for Ridesharing in Settings.app > Privacy > Motion & Fitness"
         btTitle = "Give motion permission"
         settingDeepLink = "\(UIApplication.openSettingsURLString)/prefs:root=Privacy&path=MOTION"
         type = error

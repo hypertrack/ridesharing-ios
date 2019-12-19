@@ -5,7 +5,7 @@ import CommonViewComponents
 import SwiftUI
 import Utility
 
-/// Uber error view
+/// Ridesharing error view
 public struct ErrorView: View {
   /// AppState store object
   @ObservedObject public var store: Store<AppState, ViewName>

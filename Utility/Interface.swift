@@ -125,7 +125,7 @@ public struct HideKeyboard: ViewModifier {
   }
 }
 
-/// Modifier to make Uber special button with text
+/// Modifier to make special button with text
 public struct ButtonText: ViewModifier {
   public let font = Font.system(size: 16).weight(.semibold)
 
@@ -141,7 +141,7 @@ public struct ButtonText: ViewModifier {
   }
 }
 
-public struct UberTextFieldStyle: TextFieldStyle {
+public struct RidesharingTextFieldStyle: TextFieldStyle {
   public init() {}
 
   public func _body(
@@ -156,7 +156,7 @@ public struct UberTextFieldStyle: TextFieldStyle {
   }
 }
 
-/// Modifier to make Uber special primary text label
+/// Modifier to make special primary text label
 public struct PrimaryLabel: ViewModifier {
   public init() {}
 
@@ -167,7 +167,7 @@ public struct PrimaryLabel: ViewModifier {
   }
 }
 
-/// Modifier to make Uber special secondary text label
+/// Modifier to make special secondary text label
 public struct SecondaryLabel: ViewModifier {
   public init() {}
 
@@ -177,7 +177,7 @@ public struct SecondaryLabel: ViewModifier {
   }
 }
 
-/// Modifier to make Uber special divider for summary content view
+/// Modifier to make special divider for summary content view
 public struct CenteredDivider: ViewModifier {
   public init() {}
 
