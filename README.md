@@ -1,5 +1,7 @@
 # Ridesharing driver & rider sample apps using HyperTrack SDK
 
+<p align="center">👉 <a href="https://github.com/hypertrack/ridesharing-android">Looking for the Android version?</a></p>
+
 <p align="center">
   <img src="Images/Demo.gif" alt="Apps demo"/>
 </p>
