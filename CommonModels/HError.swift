@@ -28,32 +28,37 @@ public struct HError {
   /// Initialize the error with `RecoverableError`
   private init?(error: HyperTrack.RestorableError) {
     switch error {
-      case .locationPermissionsDenied, .locationServicesDisabled:
-        title = "Where are you?"
-        subTitle = "We need location permission to connect you to riders near you. Please go into Settings grant access your device’s location for Hypertrack"
-        btTitle = "Give location permissions"
-        settingDeepLink = "\(UIApplication.openSettingsURLString)/prefs:root=Privacy&path=LOCATION"
-        type = error
-      case .motionActivityServicesDisabled:
-        title = "Provide Motion & Fitness permissions"
-        subTitle = "Ridesharing uses your movement to optimize battery usage. It will only send data when you are on the go. Please turon on  Motion & Fitness permissions for Ridesharing in Settings.app > Privacy > Motion & Fitness"
-        btTitle = "Give motion permission"
-        settingDeepLink = "\(UIApplication.openSettingsURLString)/prefs:root=Privacy&path=MOTION"
-        type = error
-      case .networkConnectionUnavailable:
-        return nil
-      case .paymentDefault:
-        title = ""
-        subTitle = "There is a problem with your payment method. Please update payment information in HyperTrack's dashboard https://dashboard.hypertrack.com/setup"
-        btTitle = ""
-        settingDeepLink = ""
-        type = error
-      case .trialEnded:
-        title = ""
-        subTitle = "HyperTrack's trial period has ended. Please add payment information in HyperTrack's dashboard https://dashboard.hypertrack.com/setup"
-        btTitle = ""
-        settingDeepLink = ""
-        type = error
+    case .locationPermissionsDenied,
+         .locationPermissionsRestricted,
+         .locationPermissionsNotDetermined,
+         .locationServicesDisabled:
+      title = "Where are you?"
+      subTitle = "We need location permission to connect you to riders near you. Please go into Settings grant access your device’s location for Hypertrack"
+      btTitle = "Give location permissions"
+      settingDeepLink = "\(UIApplication.openSettingsURLString)/prefs:root=Privacy&path=LOCATION"
+      type = error
+    case .motionActivityServicesDisabled,
+         .motionActivityPermissionsRestricted,
+         .motionActivityPermissionsNotDetermined:
+      title = "Provide Motion & Fitness permissions"
+      subTitle = "Ridesharing uses your movement to optimize battery usage. It will only send data when you are on the go. Please turon on  Motion & Fitness permissions for Ridesharing in Settings.app > Privacy > Motion & Fitness"
+      btTitle = "Give motion permission"
+      settingDeepLink = "\(UIApplication.openSettingsURLString)/prefs:root=Privacy&path=MOTION"
+      type = error
+    case .paymentDefault:
+      title = ""
+      subTitle = "There is a problem with your payment method. Please update payment information in HyperTrack's dashboard https://dashboard.hypertrack.com/setup"
+      btTitle = ""
+      settingDeepLink = ""
+      type = error
+    case .trialEnded:
+      title = ""
+      subTitle = "HyperTrack's trial period has ended. Please add payment information in HyperTrack's dashboard https://dashboard.hypertrack.com/setup"
+      btTitle = ""
+      settingDeepLink = ""
+      type = error
+    default:
+      return nil
     }
   }
 
