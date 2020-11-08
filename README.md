@@ -46,6 +46,12 @@ Before we proceed to go through the steps required to create an on-demand soluti
 
 Customer app is a mobile app which helps achieve the following:
 
+<p align="center">
+ <a href="https://www.youtube.com/watch?v=1qMFP5w32GY">
+  <img src="http://res.cloudinary.com/hypertrack/image/upload/v1525329669/customer.png" width="300"/>
+ </a>
+</p>
+
 - Displaying nearby drivers as an option offered to the customer.
 - Order request that can be sent to the on-demand logistics backend
 - Tracking driver to the customer's pickup location. To achieve this, the customer's app uses [Views SDK](/docs/guides/stream-data-to-native-apps) to provide real-time location updates to the customer
@@ -59,6 +65,12 @@ Customer app does **not** track location of the customer. No location permission
 ### Driver app
 
 Driver app is another mobile app which helps achieve the following:
+
+<p align="center">
+ <a href="https://www.youtube.com/watch?v=3R9GDQitt40">
+  <img src="http://res.cloudinary.com/hypertrack/image/upload/v1525329669/driver.png" width="300"/>
+ </a>
+</p>
 
 - Driver registration and authentication with your on-demand logistics backend
 - Displaying assigned order request to the driver
@@ -1353,17 +1365,9 @@ In summary, your on-demand apps and backend will work with HyperTrack as follows
 8. Driver drops off customer at Location Y
 9. Complete trip  with  destination Y via Trips API via on-demand logistics backend
 
-## Ridesharing sample app
 
-This works best for product development teams who are starting to build an app for their business and want to kickstart with an open sourced app built with HyperTrack for ridesharing, gig economy, and on-demand delivery use cases.
 
-HyperTrack provides popular open source ridesharing sample apps for <a href="https://github.com/hypertrack/ridesharing-android">Android</a> and <a href="https://github.com/hypertrack/ridesharing-ios">iOS</a>. Clone or fork these sample apps to get started.
 
-<p align="center">
-  <a href="https://github.com/hypertrack/ridesharing-android"> <img src="/docs/img/ridesharing-android.png" width="180px"/> </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/hypertrack/ridesharing-ios"> <img src="/docs/img/ridesharing-ios.png" width="180px"/> </a>
-</p>
 
 # TODO TODO TODO
 
@@ -1386,7 +1390,6 @@ This open source repo/s uses HyperTrack SDK for developing real world Uber-like 
  </a>
 </p>
 
-
 - **Ridesharing Driver app** can be used by driver to :
      - Find new rides
      - Accept a ride
@@ -1401,7 +1404,6 @@ This open source repo/s uses HyperTrack SDK for developing real world Uber-like 
 </p>
 
 ## Architecture
-
 
 - The Driver App uses HyperTrack SDK ([iOS](https://github.com/hypertrack/quickstart-ios)/[Android](https://github.com/hypertrack/quickstart-android)) to send its location, name, and metadata to HyperTrack's servers
 - Driver and Rider Apps use HyperTrack Views SDK ([iOS](https://github.com/hypertrack/views-ios)/[Android](https://github.com/hypertrack/views-android)) to show the driver's current location and trip's route
