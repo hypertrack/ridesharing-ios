@@ -107,8 +107,9 @@ Ridesharing apps use [HyperTrack Trips API](https://www.hypertrack.com/docs/guid
 
 For each rider's request that is accepted by the driver, a trip is [created](https://www.hypertrack.com/docs/references/#references-apis-trips-start-trip-with-destination) for the driver to pick up the rider at the rider's location. Once the pick up is completed, the trip is [completed](https://www.hypertrack.com/docs/references/#references-apis-trips-complete-trip) and then the new trip is [created](https://www.hypertrack.com/docs/references/#references-apis-trips-start-trip-with-destination) for the driver to get the rider to rider's destination. Once the rider reaches the destination and is dropped off, the trip is [completed](https://www.hypertrack.com/docs/references/#references-apis-trips-complete-trip).
 
-
-### On-demand logistics backend
+Follow instructions in our [firebase repo](https://github.com/hypertrack/ridesharing-firebase) to setup Firebase Cloud Functions that act as a backend, interacting with HyperTrack APIs described above.
+ 
+# Extend your ridesharing backend to do more TBD
 
 On-demand logistics backend is built to achieve the following:
 
@@ -122,11 +123,11 @@ On-demand logistics backend is built to achieve the following:
 
 On-demand customer downloads and installs the [customer app](#customer-app) and signs in. Customer can use the app to book an order.
 
-### Customer registration
+## Customer registration
 
 Your customer app and on-demand logistics backend implement customer registration by capturing customer's identity and verifying customer's credentials. You store customer's information in your on-demand logistics backend. The customer's identity and credentials are used to authenticate customer's order request and present to assigned drivers.
 
-### Order execution
+## Order execution
 
 The customer picks a location and orders a pickup to go to a destination. The on-demand logistics backend receives the order and stores it in its database for the next step. This step will involve finding available drivers near pickup location as explained below.
 
@@ -136,7 +137,7 @@ The driver downloads the [driver app](#driver-app), registers and authenticates 
 
 To add location tracking to your on-demand solution, you must add HyperTrack SDK to your driver app. Please use one of the following options.
 
-### Enable location tracking in driver app
+## Enable location tracking in driver app
 
 Follow these instructions to install the SDK.
 
@@ -145,7 +146,7 @@ Follow these instructions to install the SDK.
 - [Flutter SDK](/docs/install-sdk-flutter)
 - [React Native SDK](/docs/install-sdk-react-native)
 
-### Identify drivers
+## Identify drivers
 
 In order to provide a great on-demand experience for customers, add driver identity as the name for your driver's device. The driver's name will show in your customer's app.
 
@@ -172,19 +173,19 @@ For further details, documentation and code examples, please review [Nearby API 
 
 Nearby API locates app users on demand, figures out which ones are nearest to the location of interest, and returns them as an ordered list with nearest first. 
 
-### Make a request to get nearby drivers
+## Make a request to get nearby drivers
 
 
 ## Assign and accept order
 
 Once nearby available drivers located, customer's request is assigned to available drivers by your on-demand logistics backend and presented in their driver app. One of the drivers can accept the order and drive to the pickup location.
 
-### Assign order request to available drivers
+## Assign order request to available drivers
 
 On-demand logistics backend receives results of [Nearby API](#locate-nearby-drivers) and assigns order request to the nearest available drivers. Your [driver app](#driver-app) presents the pickup order in the screen to each of these available drivers, along with the identity of the customer and pickup location.
 
 
-### Driver acceptance
+## Driver acceptance
 
 As illustrated in the image above, driver app gives an opportunity for the driver to accept an assigned order. Once the driver accepts the order, on-demand logistics backend proceeds to create a trip for the driver to the pickup location as explained below.
 
@@ -198,13 +199,13 @@ To create driver tracking experience for the customer, create a trip with ETA to
 
 See the code example below that creates a trip with ETA for driver's `device_id`, with pickup `destination`:
 
-### Understanding Trips API create trip response
+## Understanding Trips API create trip response
 
 
-### Estimate object in Trip API response
+## Estimate object in Trip API response
 
 
-### Create driver trip tracking experience in customer app
+## Create driver trip tracking experience in customer app
 
 Once the driver accepts the order, your [customer app](#customer-app) should immediately start showing driver's location with the expected route to the pick up destination and displays ETA in real-time. From the steps above, your on-demand logistics backend created a trip for the driver to the pick up destination. The `trip_id` for this trip is stored by your on-demand logistics backend and is associated with the order.
 
@@ -217,7 +218,7 @@ Please review [stream data to native apps guide](/docs/guides/stream-data-to-nat
 - Observe ETA in real-time
 - Receive delay notifications in the app
 
-### Complete trip at the pickup destination
+## Complete trip at the pickup destination
 
 
 ## Track ongoing order to drop off location
@@ -264,7 +265,7 @@ A final trip summary view for a trip may look like this:
 <img src="Images/completed_trip_summary.png" width="29%" alt="Tracking Experience"/>
 </p>
 
-### Trip summary data
+## Generate trip summary data
 
 Once the trip is complete, your on-demand logistics backend can obtain detailed trip summary with distance from the pick up destination to drop off destination, including time spent as an input into your app to calculate billing charges for the customer. Please review [](/docs/guides/track-live-route-and-eta-to-destination#getting-trip-summary) to get detailed information on the trip summary data structure.
 
