@@ -52,9 +52,9 @@ Customer app is a mobile app which helps achieve the following:
 - Track customer's trip to the customer's destination. The customer's app uses [Views SDK](/docs/guides/stream-data-to-native-apps) to provide real-time location updates to the customer
 - Display trip summary to the customer after the trip completion. This is done with [Views SDK](/docs/guides/stream-data-to-native-apps)
 
-:::note
+#### Important note
+
 Customer app does **not** track location of the customer. No location permissions are necessary to be requested from the customer to support the tracking experience.
-:::
 
 ### Driver app
 
@@ -66,9 +66,9 @@ Driver app is another mobile app which helps achieve the following:
 - Generating location data for the customer to track the driver to both pickup destination as well as to drop off destination
 - Pickup and drop off order completion and sign off
 
-:::note
+#### Important note
+
 Driver app **tracks** the driver. Location and motion permissions are necessary to be requested from the driver to track an order.
-:::
 
 ### On-demand logistics backend
 
