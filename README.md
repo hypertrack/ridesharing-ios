@@ -349,275 +349,15 @@ Once the driver accepted the pickup order, your on-demand logistics backend proc
 
 To create driver tracking experience for the customer, create a trip with ETA to the pickup destination. Once the pickup order is accepted by the driver, inside your on-demand logistics backend, Use [Trips API](/docs/guides/track-live-route-and-eta-to-destination#create-a-trip-with-destination) to create a trip for driver.
 
-See the code example below that creates a trip with ETA for driver's `device_id`, with pickup `destination`:
-
-<Tabs defaultValue="js" values={[
-{label: "JavaScript", value:"js"},
-{label: "Python", value:"py"},
-{label: "Java", value:"java"},
-{label: "PHP", value:"php"},
-{label: "Ruby", value:"ruby"}
-]
-}>
-
-<TabItem value="js">
-
-```js
-
-// Instantiate Node.js helper library instance
-const hypertrack = require('hypertrack')(accountId, secretKey);
-
-let tripData = {
-  "device_id": "00112233-4455-6677-8899-AABBCCDDEEFF",
-  "destination": {
-    "geometry": {
-      "type": "Point",
-      "coordinates": [35.107479, 47.856564]
-    }
-  }
-};
-
-hypertrack.trips.create(tripData).then(trip => {
-  // Trip created
-}).catch(error => {
-  // Error handling
-})
-
-```
-
-</TabItem>
-<TabItem value="py">
-
-```py
-// Use HyperTrack Python library
-
-from hypertrack.rest import Client
-from hypertrack.exceptions import HyperTrackException
-
-hypertrack = Client({AccountId}, {SecretKey})
-
-trip_data = {
-  "device_id": "00112233-4455-6677-8899-AABBCCDDEEFF",
-  "destination": {
-    "geometry": {
-      "type": "Point",
-      "coordinates": [35.10747945667027, 47.8565694654932]
-    }
-  }
-}
-
-trip = hypertrack.trips.create(trip_data)
-print(trip)
-
-```
-
-</TabItem>
-<TabItem value="java">
-
-```java
-OkHttpClient client = new OkHttpClient();
-
-MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType,"{\n" +
-        "  \"device_id\": \"00112233-4455-6677-8899-AABBCCDDEEFF\",\n" +
-        "  \"destination\": {\n" +
-        "    \"geometry\": {\n" +
-        "      \"type\": \"Point\",\n" +
-        "      \"coordinates\": [-122.3980960195712, 37.7930386903944]\n" +
-        "    }\n" +
-        "  }\n" +
-        "}");
-
-String authString = "Basic " +
-  Base64.getEncoder().encodeToString(
-    String.format("%s:%s", "account_id_value","secret_key_value")
-      .getBytes()
-  );
-
-Request request = new Request.Builder()
-  .url("https://v3.api.hypertrack.com/trips/")
-  .post(body)
-  .addHeader("Authorization", authString)
-  .build();
-
-Response response = client.newCall(request).execute();
-
-System.out.println(response.body().string());
-```
-
-</TabItem>
-<TabItem value="php">
-
-```php
-<?php
-
-$request = new HttpRequest();
-$request->setUrl('https://v3.api.hypertrack.com/trips/');
-$request->setMethod(HTTP_METH_POST);
-
-$basicAuth = "Basic " . base64_encode('{AccountId}' . ':' . '{SecretKey}');
-
-$request->setHeaders(array(
-  'Authorization' => $basicAuth
-));
-
-$request->setBody('{
-    "device_id": "00112233-4455-6677-8899-AABBCCDDEEFF",
-    "destination": {
-        "geometry": {
-            "type": "Point",
-            "coordinates": [
-                -122.3980960195712,
-                37.7930386903944
-            ]
-        }
-    }
-}');
-
-try {
-  $response = $request->send();
-
-  echo $response->getBody();
-} catch (HttpException $ex) {
-  echo $ex;
-}
-
-?>
-```
-
-</TabItem>
-<TabItem value="ruby">
-
-```ruby
-require 'uri'
-require 'net/http'
-require 'base64'
-require 'json'
-
-url = URI("https://v3.api.hypertrack.com/trips/")
-
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
-
-request = Net::HTTP::Post.new(url)
-request["Authorization"] = 'Basic ' + Base64.strict_encode64( '{AccountId}' + ':' + '{SecretKey}' ).chomp
-request.body = {
-    "device_id": "00112233-4455-6677-8899-AABBCCDDEEFF",
-    "destination": {
-        "geometry": {
-            "type": "Point",
-            "coordinates": [
-                -122.3980960195712,
-                37.7930386903944
-            ]
-        }
-    }
-}.to_json
-
-response = http.request(request)
-puts response.read_body
-```
-
-</TabItem>
-</Tabs>
+TODO
 
 ### Understanding Trips API create trip response
 
-Once the trip is created, the Trips API responds with an active trip object that returns the original payload with additional properties.
-
-You will get an example payload response like the one below. In the response you get estimate (route/ETA) to destination, shareable URL for customers, embed URL for ops dashboards for active ( as noted in `status` field in the response ) trip.
-
-The `destination` object in the response will now contain `address` field which is an address that HyperTrack determines ( reverse geocodes ) based on `destination` coordinates you submitted in the trips creation request above. You can use this `address` to show the destination to the user after creating the trip.
-
-
-```json title="HTTP 201 - New trip with destination"
-{
-   "trip_id":"2a819f6a-5bee-4192-9077-24fc61503ae9",
-   "device_id":"00112233-4455-6677-8899-AABBCCDDEEFF",
-   "started_at":"2020-04-20T00:57:33.484361Z",
-   "completed_at":null,
-   "status":"active",
-   "views":{
-      "embed_url":"https://embed.hypertrack.com/trips/2a819f6a-5bee-4192-9077-24fc61503ae9?publishable_key=<your_publishable_key>",
-      "share_url":"https://trck.at/abcdef"
-   },
-   "device_info":{
-      "os_version":"13.3.1",
-      "sdk_version":"4.0.2-rc.5"
-   },
-   "destination":{
-      "geometry":{
-         "type":"Point",
-         "coordinates":[
-            -122.500005,
-            37.785334
-         ]
-      },
-      "radius":30,
-      "scheduled_at":null,
-      "address":"100 34th Ave, San Francisco, CA 94121, USA"
-   },
-   "estimate":{
-      "arrive_at":"2020-04-20T01:06:45.914154Z",
-      "route":{
-         "distance":4143,
-         "duration":552,
-         "remaining_duration":552,
-         "start_address":"55 Spear St, San Francisco, CA 94105, USA",
-         "end_address":"100 34th Ave, San Francisco, CA 94121, USA",
-         "polyline":{
-            "type":"LineString",
-            "coordinates":[
-               [
-                  -122.50385,
-                  37.76112
-               ],
-               ...
-            ]
-         }
-      }
-   },
-   "eta_relevance_data":{
-      "status":true
-   }
-}
-```
+TODO
 
 ### Estimate object in Trip API response
 
-The Trips API responds with an active trip object that returns the original payload with additional properties. HyperTrack provides estimates for every trip with a destination.
-
-Since in the API request we specified a destination, the Trips API response will return the `estimate` object with fields are explained here as follows:
-
-- Field `arrive_at` shows estimated time of arrival (ETA) as UTC timestamp
-- Object `route` contains the following data:
-  - Field `distance` shares estimated route distance (in meters)
-  - Fields `duration` and `remaining_duration` share actual and remaining durations (in seconds)
-  - Fields `start_address` and `end_address` display reverse geocoded place names and addresses for trip start, complete and intermediate stops (based on activity)
-  - Field `polyline` contains an array of coordinates for the estimated route from the live location to the destination as polyline in GeoJSON [`LineString`](http://wiki.geojson.org/GeoJSON_draft_version_6#LineString) format. It is an array of Point coordinates with each element linked to the next, thus creating a pathway to the destination.
-
-```json title="HTTP 201 - New trip with destination"
-   "estimate":{
-      "arrive_at":"2020-04-20T01:06:45.914154Z",
-      "route":{
-         "distance":4143,
-         "duration":552,
-         "remaining_duration":552,
-         "start_address":"55 Spear St, San Francisco, CA 94105, USA",
-         "end_address":"100 34th Ave, San Francisco, CA 94121, USA",
-         "polyline":{
-            "type":"LineString",
-            "coordinates":[
-               [
-                  -122.50385,
-                  37.76112
-               ],
-               ...
-            ]
-         }
-      }
-   }
-```
+TODO
 
 :::important
 Device tracking for your driver's app will be started remotely if you have integrated push notifications with HyperTrack SDK on [iOS](/docs/install-sdk-ios#enable-remote-notifications) and [Android](/docs/install-sdk-android#set-up-silent-push-notifications).
@@ -629,33 +369,12 @@ The driver's app would start tracking (unless already tracking) when on-demand l
 
 ### Create driver trip tracking experience in customer app
 
-Once the driver accepts the order, your [customer app](#customer-app) should immediately start showing driver's location with the expected route to the pick up destination and displays ETA in real-time. From the steps above, your on-demand logistics backend created a trip for the driver to the pick up destination. The `trip_id` for this trip is stored by your on-demand logistics backend and is associated with the order.
-
-Customer app uses Views SDK to receive trip status and real-time updates. Your customer app uses callbacks to receive this data and show them in the customer app.
-
-Please review [stream data to native apps guide](/docs/guides/stream-data-to-native-apps) to understand how this is done for iOS and Android apps using Views SDK. Once you integrate Views SDK with the customer app, the customer will be able to:
-
-- See driver moving to the pickup destination in real-timel with an expected route
-- Observe route changes as driver diverges from the expected route
-- Observe ETA in real-time
-- Receive delay notifications in the app
+TODO
 
 ### Complete trip at the pickup destination
 
-Once the driver meets the customer at the pickup destination, the following takes place:
+TODO
 
-- Driver marks the pickup in the driver app
-- On-demand logistics backend sends a request to complete trip with the `trip_id` for the trip to the pick up destination
-
-Your on-demand logistics backend uses Trips API to complete the trip with `trip_id` as follows:
-
-In order to complete the trip, HyperTrack provides you [Trips complete API](/docs/references#references-apis-trips-complete-trip). In the response, you will get markers for activity and outages as to capture history of device movement. Completed trips also include a summary with total duration, distance and steps.
-
-> POST&nbsp&nbsp&nbsp`https://v3.api.hypertrack.com/trips/{trip_id}/complete`
-
-:::important
-Driver app tracking will be stopped since you will have integrated push notifications for your app with HyperTrack SDK on [iOS](http://localhost:3000/docs/install-sdk-ios#enable-remote-notifications) and [Android](/docs/install-sdk-android#set-up-silent-push-notifications).
-:::
 
 ## Track ongoing order to drop off location
 
@@ -724,23 +443,8 @@ In summary, your on-demand apps and backend will work with HyperTrack as follows
 8. Driver drops off customer at Location Y
 9. Complete trip  with  destination Y via Trips API via on-demand logistics backend
 
-## Ridesharing sample app
+TODO TODO TODO 
 
-This works best for product development teams who are starting to build an app for their business and want to kickstart with an open sourced app built with HyperTrack for ridesharing, gig economy, and on-demand delivery use cases.
-
-HyperTrack provides popular open source ridesharing sample apps for <a href="https://github.com/hypertrack/ridesharing-android">Android</a> and <a href="https://github.com/hypertrack/ridesharing-ios">iOS</a>. Clone or fork these sample apps to get started.
-
-<p align="center">
-  <a href="https://github.com/hypertrack/ridesharing-android"> <img src="/docs/img/ridesharing-android.png" width="180px"/> </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/hypertrack/ridesharing-ios"> <img src="/docs/img/ridesharing-ios.png" width="180px"/> </a>
-</p>
-
-## Questions?
-
-If you would like help with on demand logistics use cases using live location, questions or comments on any of the topics above, please do not hesitate to <a href="mailto:help@hypertrack.com?Subject=Manage on demand logistics" target="_top">contact us</a>.
-
-<Feedback />
 
 ## Introduction
 
