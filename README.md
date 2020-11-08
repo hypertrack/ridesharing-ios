@@ -1,4 +1,4 @@
-# Build ridesharing driver & rider apps using HyperTrack SDK
+# Build ridesharing driver & rider apps using HyperTrack SDKs
 
 <p align="center">👉 <a href="https://github.com/hypertrack/ridesharing-android">Looking for the Android version?</a></p>
 
@@ -15,6 +15,10 @@ Through these on-demand platforms, supply and demand are aggregated online for s
 ## Ridesharing apps introduction
 
 This open source repo/s uses HyperTrack SDK for developing real world Uber-like consumer & driver apps.
+
+Learnings from this project can be applied to many of the on-demand logistics services listed above.
+
+A customer requests a pick up at a location chosen by the customer. The pickup order is dispatched to drivers who are available within an area of reach. One of the drivers picks up the customer's request and proceeds to the customer's location for a pick up. Once the pick up takes place, the driver will transport the customer to a destination chosen by the customer.
 
  - **Ridesharing Rider app** can be used by customer to :
       - Allow customer to select pickup and dropoff location
