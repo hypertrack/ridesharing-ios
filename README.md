@@ -2,10 +2,6 @@
 
 <p align="center">👉 <a href="https://github.com/hypertrack/ridesharing-android">Looking for the Android version?</a></p>
 
-<p align="center">
-  <img src="Images/Demo.gif" alt="Apps demo"/>
-</p>
-
 
 ## Introduction
 
@@ -15,14 +11,14 @@ These on-demand logistics services include moving, parking, courier, groceries, 
 
 Through these on-demand platforms, supply and demand are aggregated online for services to be fulfilled offline.
 
-## Creating an on-demand solution
+## Creating a ridesharing solution
 
-In this tutorial, we consider a ridesharing use case. Learnings from this tutorial can be applied to many of the on-demand logistics services listed above.
+Learnings from building a ridesharing solution can be applied to many of the on-demand logistics services listed above.
 
 A customer requests a pick up at a location chosen by the customer. The pickup order is dispatched to drivers who are available within an area of reach. One of the drivers picks up the customer's request and proceeds to the customer's location for a pick up. Once the pick up takes place, the driver will transport the customer to a destination chosen by the customer.
 
 <p align="center">
-<img src="/docs/img/gifs/ride_sharing_demo.gif" width="40%" alt="Ride sharing experience"/>
+  <img src="Images/Demo.gif" alt="Apps demo"/>
 </p>
 
 ### On-demand solution steps
