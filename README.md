@@ -261,7 +261,7 @@ Once the oder to the drop off destination is complete, your on-demand logistics 
 A final trip summary view for a trip may look like this:
 
 <p align="center">
-<img src="/docs/img/completed_trip_summary.png" width="29%" alt="Tracking Experience"/>
+<img src="/Images/completed_trip_summary.png" width="29%" alt="Tracking Experience"/>
 </p>
 
 ### Trip summary data
