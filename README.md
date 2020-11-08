@@ -107,6 +107,169 @@ Ridesharing apps use [HyperTrack Trips API](https://www.hypertrack.com/docs/guid
 
 For each rider's request that is accepted by the driver, a trip is [created](https://www.hypertrack.com/docs/references/#references-apis-trips-start-trip-with-destination) for the driver to pick up the rider at the rider's location. Once the pick up is completed, the trip is [completed](https://www.hypertrack.com/docs/references/#references-apis-trips-complete-trip) and then the new trip is [created](https://www.hypertrack.com/docs/references/#references-apis-trips-start-trip-with-destination) for the driver to get the rider to rider's destination. Once the rider reaches the destination and is dropped off, the trip is [completed](https://www.hypertrack.com/docs/references/#references-apis-trips-complete-trip).
 
+
+### On-demand logistics backend
+
+On-demand logistics backend is built to achieve the following:
+
+- Customer and driver registration and management
+- Customer order requests
+- Find nearby drivers and assign customer order requests with [Nearby API](#making-a-request-to-get-nearby-drivers)
+- Receive driver acceptance for orders
+- Manage trips to customer's pickup and drop off locations with [Trips API](/docs/references#references-apis-trips)
+
+## Customer order
+
+On-demand customer downloads and installs the [customer app](#customer-app) and signs in. Customer can use the app to book an order.
+
+### Customer registration
+
+Your customer app and on-demand logistics backend implement customer registration by capturing customer's identity and verifying customer's credentials. You store customer's information in your on-demand logistics backend. The customer's identity and credentials are used to authenticate customer's order request and present to assigned drivers.
+
+### Order execution
+
+The customer picks a location and orders a pickup to go to a destination. The on-demand logistics backend receives the order and stores it in its database for the next step. This step will involve finding available drivers near pickup location as explained below.
+
+## Driver registration
+
+The driver downloads the [driver app](#driver-app), registers and authenticates to your on-demand logistics backend. In the process of registration, driver app captures driver's `device_id` from HyperTrack SDK which is sent to on-demand logistics backend along with the driver's identity and credentials.
+
+To add location tracking to your on-demand solution, you must add HyperTrack SDK to your driver app. Please use one of the following options.
+
+### Enable location tracking in driver app
+
+Follow these instructions to install the SDK.
+
+- [Android SDK](/docs/install-sdk-android)
+- [iOS SDK](/docs/install-sdk-ios)
+- [Flutter SDK](/docs/install-sdk-flutter)
+- [React Native SDK](/docs/install-sdk-react-native)
+
+### Identify drivers
+
+In order to provide a great on-demand experience for customers, add driver identity as the name for your driver's device. The driver's name will show in your customer's app.
+
+Review instructions on how to set [device name and metadata](/docs/guides/setup-and-manage-devices#setting-device-name-and-metadata) and make a decision on what works best for your on-demand app.
+
+For example, the device name can be a driver's name or some other identifier you use in your system with example below:
+
+```shell script
+{
+  "name": "Kanav",
+  "metadata": {
+    "model": "i3",
+    "make": "BMW",
+    "color": "blue"
+  }
+}
+```
+
+## Locate nearby drivers
+
+Live location is an important input to the driver dispatch algorithm to request a pickup and dropoff. 
+
+For further details, documentation and code examples, please review [Nearby API guide](/docs/guides/dispatch-work-to-nearby-devices).
+
+Nearby API locates app users on demand, figures out which ones are nearest to the location of interest, and returns them as an ordered list with nearest first. 
+
+### Make a request to get nearby drivers
+
+
+## Assign and accept order
+
+Once nearby available drivers located, customer's request is assigned to available drivers by your on-demand logistics backend and presented in their driver app. One of the drivers can accept the order and drive to the pickup location.
+
+### Assign order request to available drivers
+
+On-demand logistics backend receives results of [Nearby API](#locate-nearby-drivers) and assigns order request to the nearest available drivers. Your [driver app](#driver-app) presents the pickup order in the screen to each of these available drivers, along with the identity of the customer and pickup location.
+
+
+### Driver acceptance
+
+As illustrated in the image above, driver app gives an opportunity for the driver to accept an assigned order. Once the driver accepts the order, on-demand logistics backend proceeds to create a trip for the driver to the pickup location as explained below.
+
+## Track driver to customer pickup location
+
+Once the driver accepted the pickup order, your on-demand logistics backend proceeds to work with Trips API to create a trip for the driver to the destination at pickup location and provide a real-time tracking experience to the customer.
+
+### Create a trip with destination at pick up location
+
+To create driver tracking experience for the customer, create a trip with ETA to the pickup destination. Once the pickup order is accepted by the driver, inside your on-demand logistics backend, Use [Trips API](/docs/guides/track-live-route-and-eta-to-destination#create-a-trip-with-destination) to create a trip for driver.
+
+See the code example below that creates a trip with ETA for driver's `device_id`, with pickup `destination`:
+
+### Understanding Trips API create trip response
+
+
+### Estimate object in Trip API response
+
+
+### Create driver trip tracking experience in customer app
+
+Once the driver accepts the order, your [customer app](#customer-app) should immediately start showing driver's location with the expected route to the pick up destination and displays ETA in real-time. From the steps above, your on-demand logistics backend created a trip for the driver to the pick up destination. The `trip_id` for this trip is stored by your on-demand logistics backend and is associated with the order.
+
+Customer app uses Views SDK to receive trip status and real-time updates. Your customer app uses callbacks to receive this data and show them in the customer app.
+
+Please review [stream data to native apps guide](/docs/guides/stream-data-to-native-apps) to understand how this is done for iOS and Android apps using Views SDK. Once you integrate Views SDK with the customer app, the customer will be able to:
+
+- See driver moving to the pickup destination in real-timel with an expected route
+- Observe route changes as driver diverges from the expected route
+- Observe ETA in real-time
+- Receive delay notifications in the app
+
+### Complete trip at the pickup destination
+
+
+## Track ongoing order to drop off location
+
+Once the driver picks up the customer at the pickup location, your on-demand logistics backend proceeds to work with Trips API to create a trip for the driver to the drop off destination.
+
+### Create a trip with destination at drop off location
+
+Follow steps just as listed in [create a trip with destination at pick up location](#create-a-trip-with-destination-at-pick-up-location) above, with a trip to destination at the drop off location.
+
+### Customer app tracking experience for trip to drop off location
+
+The steps above will generate a new `trip_id`. Using this `trip_id` your customer app will receive real-time trip updates just as described in the above in [create driver trip tracking experience in customer app](#create-driver-trip-tracking-experience-in-customer-app). You replicate the exact steps to support customer's experience of tracking the trip to the drop off location.
+
+### Complete trip at the drop off destination
+
+Once the driver drops off the customer at the drop off destination, the driver marks the order as completed in the app. Once your on-demand logistics backend is notified, it goes ahead to complete active trip with it's `trip_id` via Trips API just as described for the previous steps above in [complete trip at the pickup destination](#complete-trip-at-the-pickup-destination)
+
+## Share tracking updates
+
+As the driver transports the customer to the drop off destination, you can provide real-time location tracking experience to the customer, customer's family, and friends. This can be done with the share URL link as explained below.
+
+### Share URL for trip to drop off location
+
+Trips API gives you an ability for you, as a developer, to create live, real-time, high fidelity, location sharing with your customer via `share_url` link.
+
+Please see an image below for a mobile location sharing viewing experience in the web browser. This link can be shared with family and friend. Once they receive the link, the web browser will continually display and update the location of the driver's device as it moves towards the drop off destination while ETA is updated live.
+
+<p align="center">
+<img src="/docs/img/mobile_350px.gif" width="30%" alt="Tracking Experience"/>
+</p>
+
+Share URL has the following structure: <code>https://trck.at/{7_digit_tracking_id}</code>.
+
+This makes it a total of 23 characters, and therefore a friendly URL to share via text or other messengers. Share URLs stay accessible permanently and show trip summary after trip completion.
+
+## Generate order summary
+
+Once the oder to the drop off destination is complete, your on-demand logistics backend completes the trip and generates a trip summary that can be shared with both customer and the driver.
+
+A final trip summary view for a trip may look like this:
+
+<p align="center">
+<img src="/docs/img/completed_trip_summary.png" width="29%" alt="Tracking Experience"/>
+</p>
+
+### Trip summary data
+
+Once the trip is complete, your on-demand logistics backend can obtain detailed trip summary with distance from the pick up destination to drop off destination, including time spent as an input into your app to calculate billing charges for the customer. Please review [](/docs/guides/track-live-route-and-eta-to-destination#getting-trip-summary) to get detailed information on the trip summary data structure.
+
+
+
 # How Ridesharing sample apps use HyperTrack SDK
 
 Ridesharing Driver app uses HyperTrack SDK to track driver's position in 3 cases:
