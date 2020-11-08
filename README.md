@@ -1,4 +1,4 @@
-# Build ridesharing driver & rider sample apps using HyperTrack SDK
+# Build ridesharing driver & rider apps using HyperTrack SDK
 
 <p align="center">👉 <a href="https://github.com/hypertrack/ridesharing-android">Looking for the Android version?</a></p>
 
@@ -6,7 +6,13 @@
   <img src="Images/Demo.gif" alt="Apps demo"/>
 </p>
 
-Uber’s business model has given rise to a large number of Uber-for-X services. Among other things, X equals moving, parking, courier, groceries, flowers, alcohol, dog walks, massages, dry cleaning, vets, medicines, car washes, roadside assistance and marijuana. Through these on-demand platforms, supply and demand are aggregated online for services to be fulfilled offline.
+We have now entered the second decade of a large variety of on-demand logistics services, such as ridesharing, gig work and on-demand delivery.
+
+These on-demand logistics services include moving, parking, courier, groceries, flowers, dog walks, massages, dry cleaning, vets, medicines, car washes, roadside assistance, cannabis and more.
+
+Through these on-demand platforms, supply and demand are aggregated online for services to be fulfilled offline.
+
+## Ridesharing apps introduction
 
 This open source repo/s uses HyperTrack SDK for developing real world Uber-like consumer & driver apps.
 
