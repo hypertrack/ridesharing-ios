@@ -12,7 +12,7 @@ These on-demand logistics services include moving, parking, courier, groceries, 
 
 Through these on-demand platforms, supply and demand are aggregated online for services to be fulfilled offline.
 
-## Ridesharing apps introduction
+# Ridesharing apps introduction
 
 This open source repo/s uses HyperTrack SDK for developing real world Uber-like consumer & driver apps.
 
@@ -20,7 +20,7 @@ Learnings from this project can be applied to many of the on-demand logistics se
 
 A customer requests a pick up at a location chosen by the customer. The pickup order is dispatched to drivers who are available within an area of reach. One of the drivers picks up the customer's request and proceeds to the customer's location for a pick up. Once the pick up takes place, the driver will transport the customer to a destination chosen by the customer.
 
-### Ridesharing rider app
+## Ridesharing rider app
 
  - **Ridesharing Rider app** can be used by customer to :
       - Allow customer to select pickup and dropoff location
@@ -36,7 +36,11 @@ A customer requests a pick up at a location chosen by the customer. The pickup o
  </a>
 </p>
 
-### Ridesharing driver app
+### Note
+
+Customer app does not track location of the customer. No location permissions are necessary to be requested from the customer to support the tracking experience.
+
+## Ridesharing driver app
 
 - **Ridesharing Driver app** can be used by driver to :
      - Find new rides
@@ -51,14 +55,16 @@ A customer requests a pick up at a location chosen by the customer. The pickup o
  </a>
 </p>
 
-## Architecture
+### Note
 
+Driver app tracks the driver. Location and motion permissions are necessary to be requested from the driver to track an order.
+
+# Architecture review
 
 - The Driver App uses HyperTrack SDK ([iOS](https://github.com/hypertrack/quickstart-ios)/[Android](https://github.com/hypertrack/quickstart-android)) to send its location, name, and metadata to HyperTrack's servers
 - Driver and Rider Apps use HyperTrack Views SDK ([iOS](https://github.com/hypertrack/views-ios)/[Android](https://github.com/hypertrack/views-android)) to show the driver's current location and trip's route
 - Driver and Rider Apps are subscribed to [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore) to sync users and orders between them
 - Firebase Cloud Functions react to the order status field in Cloud Firestore, create and complete trips using [HyperTrack Trips APIs](https://www.hypertrack.com/docs/guides/track-trips-with-destination), listen to [HyperTrack Webhooks](https://www.hypertrack.com/docs/guides/track-trips-with-destination#get-trip-updates-on-webhooks) and update the order status and trip fields with new results
-
 
 ![Architecture](Images/ArchitectureUpdated.png)
 
@@ -95,13 +101,13 @@ A customer requests a pick up at a location chosen by the customer. The pickup o
    - When this trip is completed, Rider and Driver Apps show trip summary using HyperTrack Views SDK
 </details>
 
-## How Ridesharing sample apps use HyperTrack API
+# How Ridesharing sample apps use HyperTrack API
 
 Ridesharing apps use [HyperTrack Trips API](https://www.hypertrack.com/docs/guides/track-trips-with-destination) to [create](https://www.hypertrack.com/docs/references/#references-apis-trips-start-trip-with-destination) and [complete](https://www.hypertrack.com/docs/references/#references-apis-trips-complete-trip) trips by using Firebase Cloud Functions. Firebase allows ridesharing sample appilcations integrate with HyperTrack Trips API via backend server integration.
 
 For each rider's request that is accepted by the driver, a trip is [created](https://www.hypertrack.com/docs/references/#references-apis-trips-start-trip-with-destination) for the driver to pick up the rider at the rider's location. Once the pick up is completed, the trip is [completed](https://www.hypertrack.com/docs/references/#references-apis-trips-complete-trip) and then the new trip is [created](https://www.hypertrack.com/docs/references/#references-apis-trips-start-trip-with-destination) for the driver to get the rider to rider's destination. Once the rider reaches the destination and is dropped off, the trip is [completed](https://www.hypertrack.com/docs/references/#references-apis-trips-complete-trip).
 
-## How Ridesharing sample apps use HyperTrack SDK
+# How Ridesharing sample apps use HyperTrack SDK
 
 Ridesharing Driver app uses HyperTrack SDK to track driver's position in 3 cases:
 - When app is active to display all drivers locations on riders maps
@@ -110,7 +116,7 @@ Ridesharing Driver app uses HyperTrack SDK to track driver's position in 3 cases
 
 You can find the SDK documentation [here](https://github.com/hypertrack/quickstart-ios).
 
-### Silent push notifications
+## Silent push notifications
 
 Driver app integrates HyperTrack SDK with silent push notifictions to:
 - Start tracking location immediately when Firebase creates a trip for accepted order
@@ -166,7 +172,7 @@ Here is how they are integrated in Driver app:
   }
 ```
 
-### SDK Initialization
+## SDK Initialization
 
 HyperTrack SDK initializes successfully when nothing prevents it from tracking. This is modeled by `Result` type. Here, in Driver app, when `Result` is `.success` we present one UI and when it's `.failure` another. This ensures that UI that get initialized SDK won't get null, and can use the SDK freely, and UIs designed for error handling won't get SDK at all, and will only display errors.
 
@@ -198,7 +204,7 @@ switch HyperTrack.makeSDK(
 }
 ```
 
-### DeviceID
+## DeviceID
 
 DeviceID is used to identify a device on HyperTrack. Driver app uses this ID when creating a user in Firebase.
 
@@ -227,7 +233,7 @@ private func makeNewUser() {
 
 Later in Views SDK snippets, both Driver and Rider app are using this ID to display driver on a map.
 
-### Device name and metadata
+## Device name and metadata
 
 Device name and metadata are displayed in HyperTrack's [dashboard](https://dashboard.hypertrack.com). To make it easy for operators to find drivers by their name or filter them by metadata, Driver app sets those fields using User model from Firebase:
 
@@ -253,7 +259,7 @@ private func makeHTUser(_ user: User) {
 }
 ```
 
-### Start tracking and sync device settings
+## Start tracking and sync device settings
 
 Driver app tracks the driver in an interesting way. We want to always track driver when the app is running in foreground. This allows us to show cars of available drivers in Rider app's map. At the same time we want to track drivers in background only when they have an active order. In this snippet we subscribe to OS notifications and call `start()` tracking when app is brought to foreground. But when the app is going into background we consult with `syncDeviceSettings()` to stop tracking if driver doesn't have active trips.
 
@@ -269,11 +275,11 @@ Driver app tracks the driver in an interesting way. We want to always track driv
 }
 ```
 
-## How Ridesharing sample apps use Views SDK
+# How Ridesharing sample apps use Views SDK
 
 Both Rider and Driver apps use [HyperTrackViews SDK](https://github.com/hypertrack/views-ios) to display realtime location and trip updates on a map.
 
-### Subscribing to location updates
+## Subscribing to location updates
 
 Both Driver and Rider apps subscribe to driver's location updates using `subscribeToMovementStatusUpdates(for:completionHandler:)` method:
 
@@ -297,7 +303,7 @@ func createUserMovementStatusSubscription() {
 }
 ```
 
-### Placing device or trip on a map
+## Placing device or trip on a map
 
 MapKit part of the library can put any `CLLocation` as devices location.
 
@@ -336,7 +342,7 @@ private func configureForDrivingState(_ mapView: MKMapView) {
 }
 ```
 
-### Making the device or trip center on a map
+## Making the device or trip center on a map
 
 In apps that show tracking data, usually user needs to see all the data on the screen, be it current location, trip polylines or destination markers. This view needs to re-zoom with animation every time the data is changing. This is done in the Uber app.
 
@@ -361,12 +367,12 @@ private func isZoomNeeded(_ mapView: MKMapView) {
 }
 ```
 
-## How to Begin
+# How to Begin
 
-### 1. Get your keys
+## 1. Get your keys
  - [Signup](https://dashboard.hypertrack.com/signup) to get your [HyperTrack Publishable Key](https://dashboard.hypertrack.com/setup)
 
-### 2. Set up rider & driver app
+## 2. Set up rider & driver app
 ```bash
 # Clone this repository
 $ git clone https://github.com/hypertrack/ridesharing-ios.git
@@ -384,7 +390,7 @@ $ pod install
 public let publishableKey: String = "YOUR_PUBLISHABLE_KEY_HERE"
 ```
 
-### 3. Set up Firebase
+## 3. Set up Firebase
  - Create a Firebase project. For detail steps refer to _Step 1_: https://firebase.google.com/docs/ios/setup#create-firebase-project
  - Register Driver app with `com.hypertrack.ridesharing.driver.ios.github` bundle ID and Rider app with `com.hypertrack.ridesharing.rider.ios.github` bundle ID. More details in _Step 2_: https://firebase.google.com/docs/ios/setup#register-app
  - Move Driver app's `GoogleService-Info.plist` to the Driver app target and Rider's to Riders. Described in _Step 3_: https://firebase.google.com/docs/ios/setup#add-config-file No need to follow Step 4 and 5, they are already implemented in the app.
@@ -392,19 +398,19 @@ public let publishableKey: String = "YOUR_PUBLISHABLE_KEY_HERE"
  - Follow instructions in our [firebase repo](https://github.com/hypertrack/ridesharing-firebase) to setup Firebase Cloud Functions that act as a backend, interacting with HyperTrack APIs.
  - Note that Firebase Cloud Firestore and Cloud Functions are _not required_ to use HyperTrack SDKs. You may have your own server that is connected to your apps.
 
-### 4. Run the apps
+## 4. Run the apps
 
 - You can run the Rider app in Simulator, but Driver app needs to be run on-device due to Simulator's lack of motion hardware.
 - Being able to run the apps and signup means that the whole setup works.
 - In these samples apps, Driver app creates actions for pickup and drop, which are tracked by Driver & Rider apps. See [architecture](#architecture) for details.
 
-## Documentation
+# Documentation
 For detailed documentation of the APIs, customizations and what all you can build using HyperTrack, please visit the official [docs](https://www.hypertrack.com/docs/).
 
-## Contribute
+# Contribute
 Feel free to clone, use, and contribute back via [pull requests](https://help.github.com/articles/about-pull-requests/). We'd love to see your pull requests - send them in! Please use the [issues tracker](https://github.com/hypertrack/ridesharing-ios/issues) to raise bug reports and feature requests.
 
 We are excited to see what live location feature you build in your app using this project. Do ping us at help@hypertrack.com once you build one, and we would love to feature your app on our blog!
 
-## Support
+# Support
 Join our [Slack community](https://join.slack.com/t/hypertracksupport/shared_invite/enQtNDA0MDYxMzY1MDMxLTdmNDQ1ZDA1MTQxOTU2NTgwZTNiMzUyZDk0OThlMmJkNmE0ZGI2NGY2ZGRhYjY0Yzc0NTJlZWY2ZmE5ZTA2NjI) for instant responses. You can also email us at help@hypertrack.com.
