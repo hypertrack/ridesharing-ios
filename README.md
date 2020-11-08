@@ -1365,11 +1365,8 @@ HyperTrack provides popular open source ridesharing sample apps for <a href="htt
   <a href="https://github.com/hypertrack/ridesharing-ios"> <img src="/docs/img/ridesharing-ios.png" width="180px"/> </a>
 </p>
 
-## Questions?
+# TODO TODO TODO
 
-If you would like help with on demand logistics use cases using live location, questions or comments on any of the topics above, please do not hesitate to <a href="mailto:help@hypertrack.com?Subject=Manage on demand logistics" target="_top">contact us</a>.
-
-<Feedback />
 
 Uber’s business model has given rise to a large number of Uber-for-X services. Among other things, X equals moving, parking, courier, groceries, flowers, alcohol, dog walks, massages, dry cleaning, vets, medicines, car washes, roadside assistance and marijuana. Through these on-demand platforms, supply and demand are aggregated online for services to be fulfilled offline.
 
