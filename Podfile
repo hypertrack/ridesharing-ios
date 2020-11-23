@@ -3,8 +3,8 @@ inhibit_all_warnings!
 use_frameworks!
 
 def hyperTrack_pods
-  pod 'HyperTrack', "4.2.1"
-  pod 'HyperTrackViews/MapKit', "0.5.1"
+  pod 'HyperTrack', "4.6.0"
+  pod 'HyperTrackViews/MapKit', "0.6.0"
 end
 
 def fireStore_pods

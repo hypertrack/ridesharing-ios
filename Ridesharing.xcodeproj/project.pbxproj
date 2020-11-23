@@ -74,6 +74,8 @@
 		B48B443A238550E100275C8B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B4439238550E100275C8B /* Constant.swift */; };
 		B48B4444238555FF00275C8B /* AppState.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48B44302385490A00275C8B /* AppState.framework */; };
 		B48B445C238555FF00275C8B /* Utility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48B4378238538E200275C8B /* Utility.framework */; };
+		B4A09E83256BB692000045DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4A09E82256BB692000045DB /* GoogleService-Info.plist */; };
+		B4A09E84256BB692000045DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4A09E82256BB692000045DB /* GoogleService-Info.plist */; };
 		B4B479BF2382ED5100A3DE03 /* DriverDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B479BE2382ED5100A3DE03 /* DriverDataFlow.swift */; };
 		B4C25088235EDB8C0071794B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C25087235EDB8C0071794B /* AppDelegate.swift */; };
 		B4C2508A235EDB8C0071794B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C25089235EDB8C0071794B /* SceneDelegate.swift */; };
@@ -422,6 +424,7 @@
 		B48B44322385490A00275C8B /* AppState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppState.h; sourceTree = "<group>"; };
 		B48B44332385490A00275C8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B48B4439238550E100275C8B /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		B4A09E82256BB692000045DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B4B479BE2382ED5100A3DE03 /* DriverDataFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDataFlow.swift; sourceTree = "<group>"; };
 		B4B661322368832C0058B897 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		B4B66134236886BD0058B897 /* HError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HError.swift; sourceTree = "<group>"; };
@@ -808,6 +811,7 @@
 				B4221E80236045F000DA43C5 /* ViewComponents */,
 				B4C25092235EDB8E0071794B /* LaunchScreen.storyboard */,
 				B4E9067623954CD800D957D9 /* Driver.entitlements */,
+				B4A09E82256BB692000045DB /* GoogleService-Info.plist */,
 				B4C2508D235EDB8E0071794B /* Assets.xcassets */,
 				B4C25095235EDB8E0071794B /* Info.plist */,
 			);
@@ -1175,6 +1179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B48B436E2385381800275C8B /* LaunchScreen.storyboard in Resources */,
+				B4A09E84256BB692000045DB /* GoogleService-Info.plist in Resources */,
 				B48B436B2385381800275C8B /* Preview Assets.xcassets in Resources */,
 				B48B43682385381800275C8B /* Assets.xcassets in Resources */,
 			);
@@ -1234,6 +1239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4C25094235EDB8E0071794B /* LaunchScreen.storyboard in Resources */,
+				B4A09E83256BB692000045DB /* GoogleService-Info.plist in Resources */,
 				B4C25091235EDB8E0071794B /* Preview Assets.xcassets in Resources */,
 				B4C2508E235EDB8E0071794B /* Assets.xcassets in Resources */,
 			);
