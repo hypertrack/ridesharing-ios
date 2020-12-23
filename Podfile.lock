@@ -322,9 +322,9 @@ PODS:
     - BoringSSL-GRPC (= 0.0.7)
     - gRPC-Core/Interface (= 1.28.2)
   - gRPC-Core/Interface (1.28.2)
-  - HyperTrack (4.6.0):
-    - HyperTrack/Swift (= 4.6.0)
-  - HyperTrack/Swift (4.6.0)
+  - HyperTrack (4.7.0):
+    - HyperTrack/Swift (= 4.7.0)
+  - HyperTrack/Swift (4.7.0)
   - HyperTrackViews/Core (0.6.0):
     - AWSAppSync (= 3.0.2)
   - HyperTrackViews/MapKit (0.6.0):
@@ -347,7 +347,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - FirebaseFirestoreSwift
-  - HyperTrack (= 4.6.0)
+  - HyperTrack (= 4.7.0)
   - HyperTrackViews/MapKit (= 0.6.0)
 
 SPEC REPOS:
@@ -396,7 +396,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
-  HyperTrack: 7348ec6feb266c7909496ea59602ac4ad78b972b
+  HyperTrack: ad630d0ece08ccaad6050847d8c48cb27eb0c3de
   HyperTrackViews: 8c5068c2cb8d7337fe89d4c298085a2df83611cd
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
@@ -405,6 +405,6 @@ SPEC CHECKSUMS:
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
 
-PODFILE CHECKSUM: 73f372db69cdf10b221163f7261513da19fa5f72
+PODFILE CHECKSUM: 1993b41ee3861a19a04aa0a8fe6b8e8b646d0d1a
 
 COCOAPODS: 1.10.0

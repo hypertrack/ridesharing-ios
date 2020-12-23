@@ -1,5 +1,9 @@
 # Build ridesharing driver & rider apps using HyperTrack SDKs
 
+![GitHub](https://img.shields.io/github/license/hypertrack/ridesharing-ios.svg)
+![Cocoapods platforms](https://img.shields.io/cocoapods/p/HyperTrack.svg)
+[![iOS SDK](https://img.shields.io/badge/iOS%20SDK-4.7.0-brightgreen.svg)](https://cocoapods.org/pods/HyperTrack)
+
 <p align="center">👉 <a href="https://github.com/hypertrack/ridesharing-android">Looking for the Android version?</a></p>
 
 <p align="center">
